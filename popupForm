@@ -1,0 +1,6 @@
+// need 2 plagins: Contact Form 7 and Easy FancyBox
+
+<a class="fancybox-inline" href="#contact_form_pop">Send</a>
+<div class="fancybox-hidden" style="display: none;">
+  <div id="contact_form_pop"> [contact-form-7 id="76" title="Send email"] </div>
+</div>
