@@ -3,7 +3,12 @@
 <?php $alt_text = get_post_meta($img_id , '_wp_attachment_image_alt', true); ?>
 <img alt='<?php  echo $alt_text ?>'>
 
-// output title text thumbnail
+// output title thumbnail
 <?php $img_id = get_post_thumbnail_id(get_the_ID()); ?>
-<?php $alt_text = get_the_title($img_id) ?>
-<?php  echo $alt_text ?>
+<?php $title_text = get_the_title($img_id) ?>
+<?php  echo $title_tex ?>
+
+// output discription thumbnail
+<?php $img_id = get_post_thumbnail_id(get_the_ID()); ?>
+<?php $disc_text = get_post_field('post_content', $img_id) ?>
+<?php  echo $disc_text ?>
