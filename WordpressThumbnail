@@ -12,3 +12,6 @@
 <?php $img_id = get_post_thumbnail_id(get_the_ID()); ?>
 <?php $disc_text = get_post_field('post_content', $img_id) ?>
 <?php  echo $disc_text ?>
+
+// output caption thumbnail
+<?php echo the_post_thumbnail_caption() ?>
