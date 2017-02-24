@@ -1,6 +1,7 @@
 Custom Post Templates
 Advanced Custom Fields
 Timber
-Smooth Scroll Up - стрілка вверх
-Responsive Lightbox by dFactory, Easy SwipeBox - перегляд фоток на сайті, можна слайдерувати на телефоні
-foogalery - створюєш кльові галереї, а перглядаєш в стандартному плагіні або Easy SwipeBox
+Smooth Scroll Up - СЃС‚СЂС–Р»РєР° РІРІРµСЂС…
+Responsive Lightbox by dFactory, Easy SwipeBox - РїРµСЂРµРіР»СЏРґ С„РѕС‚РѕРє РЅР° СЃР°Р№С‚С–, РјРѕР¶РЅР° СЃР»Р°Р№РґРµСЂСѓРІР°С‚Рё РЅР° С‚РµР»РµС„РѕРЅС–
+foogalery - СЃС‚РІРѕСЂСЋС”С€ РєР»СЊРѕРІС– РіР°Р»РµСЂРµС—, Р° РїРµСЂРіР»СЏРґР°С”С€ РІ СЃС‚Р°РЅРґР°СЂС‚РЅРѕРјСѓ РїР»Р°РіС–РЅС– Р°Р±Рѕ Easy SwipeBox
+TinyMCE Advanced - СЂРѕР·С€РёСЂРµРЅРёР№ С‚РµРєСЃС‚РѕРІРёР№ СЂРµРґР°РєС‚РѕСЂ
