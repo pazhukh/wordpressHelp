@@ -1,0 +1,52 @@
+//Шлях до картинки
+<img src="<?php bloginfo('template_url'); ?>/image/dropdown.png">
+
+//Додаємо в гору на кожну нашу шаблонну сторінку (Лише міняємо слово "contact" на назви наших сторінок, щоб нам було зрозуміло)
+<?php
+/*
+Template Name: contact 
+*/
+?>
+
+//посилання на головну сторінку сайту
+<a href="<?php echo home_url(); ?>">
+
+//вставляє назву поточної сторінки( назва активного меню)
+<?php the_title(); ?>
+
+//вставляє заголовок поточної сторінки
+<title><?php echo wp_get_document_title(); ?></title>
+
+//назва сайту
+<title><?php bloginfo('name')?></title>
+
+//вивід постів
+<?php if (have_posts()){
+   while (have_posts()) {the_post(); ?> 
+      
+     // стандартний вивід записів 
+      
+<?php }
+} else {
+} ?>
+
+//в цикл постів
+<?php the_title(); ?>
+<?php the_content(); ?> 
+<?php the_post_thumbnail('full' картику вставляє); ?>
+<a href='<?php the_permalink(); ?>'></a>
+<?php the_excerpt()?>
+<?php the_time('g:i:s'); ?>
+
+//Виводить всі пости конкретної категорії. (також можна задавати різні обмеження для постів в query_posts)
+<?php
+$args = array('category_name'=>'name1, name2, name3', 'numberposts'=> 1, 'tag'=>'important', 'orderby'=>'modified');
+$myposts = get_posts( $args );
+foreach( $myposts as $post ){
+  setup_postdata($post); ?>
+	// стандартний вивід записів
+<?php }
+wp_reset_postdata(); // скидаємо перемінну $post
+?>
+
+
