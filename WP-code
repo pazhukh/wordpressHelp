@@ -23,9 +23,7 @@ Template Name: contact
 //вивід постів
 <?php if (have_posts()){
    while (have_posts()) {the_post(); ?> 
-      
-     // стандартний вивід записів 
-      
+     // шаблон поста 
 <?php }
 } else {
 } ?>
@@ -48,5 +46,32 @@ foreach( $myposts as $post ){
 <?php }
 wp_reset_postdata(); // скидаємо перемінну $post
 ?>
+
+//виводити пости в інший кастумний single2.php має бути: single.php(в якому цей код є і більше нічого)  та два інших single-another.php
+<?php
+$post = $wp_query->post;
+if ( in_category('21') ) {
+include(TEMPLATEPATH . '/назва 2-го шаблона single2.php ');
+} else {
+    include(TEMPLATEPATH.'/single_default.php');
+}
+?>
+
+//В single.php якщо потрібно виводити інші пости такої ж категорії як і пост на сторінці single.php 
+//В циклі пишемо ось це!!!!! <?php $post_id = get_the_ID(); ?>
+<?php 
+$cat = get_the_category($post_id);
+$catName = $cat[0]->slug;
+$args = array( 'category_name' => $catName, 'exclude'=> $post_id, 'orderby'=>'rand' );
+ $myposts = get_posts( $args ); 
+  foreach( $myposts as $post ){ setup_postdata($post); ?>
+//Шаблон поста
+<?php } wp_reset_postdata(); ?>
+
+//Вивід однієї конкретної публікації для LandingPage актуально
+<?php if ( have_posts() ) : query_posts('p=1');
+while (have_posts()) : the_post(); ?>
+//шаблон поста
+<? endwhile; endif; wp_reset_query(); ?>
 
 
