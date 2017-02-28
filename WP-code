@@ -19,6 +19,7 @@ Template Name: contact
 
 //назва сайту
 <title><?php bloginfo('name')?></title>
+<?php get_bloginfo('name')?>
 
 //вивід постів
 <?php if (have_posts()){
