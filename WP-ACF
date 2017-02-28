@@ -1,0 +1,36 @@
+//Повертаємо ID посту. Код вставляємо перед всіма кодами ACF!!!
+<?php $post_id = get_the_ID(); ?>
+
+//вставляємо текстовий редактор
+<?php the_field('name_of_field'); ?>
+
+//вставляємо текст або багаторядкове поле
+<?php echo get_post_meta( $post->ID, 'name_of_field', true); ?>
+
+//виводимо фотографію
+<?php 
+$image = get_field('Name_of_field');
+if( !empty($image) ): ?>
+    <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+<?php endif; ?>
+
+//добавляти background-image через адмінку
+<div style="background-image: url('<?php the_field('name_of_field'); ?>');">
+
+//виводимо ссилки на  інші пости в пості чи на сторінці (Reletionship)
+<?php $posts = get_field('testimonial'); ?>
+    <?php if( $posts ): ?>
+    <?php foreach( $posts as $post): // variable must be called $post (IMPORTANT) ?>
+        <?php setup_postdata($post); ?>
+        <?php echo get_the_excerpt(); ?>
+        <a href="<?php the_permalink(); ?>">+More</a>
+        <?php the_title(); ?>
+    <?php endforeach; ?>
+    <?php wp_reset_postdata(); ?>
+    <?php endif; ?>
+
+//коли не показує довільне поле тоді поставити перед ним ось цей код
+<?php wp_reset_query(); ?>
+
+//в index.php не працює АСF, потрібне додати додаткове поле    get_option('page_for_posts')
+<?php the_field('name_of_field', get_option('page_for_posts')); ?>
