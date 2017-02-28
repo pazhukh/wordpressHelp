@@ -76,3 +76,11 @@ while (have_posts()) : the_post(); ?>
 <? endwhile; endif; wp_reset_query(); ?>
 
 
+//вивід назви категорії по Slug
+<?php
+$idObj = get_category_by_slug('category-name'); 
+$id = $idObj->term_id;
+echo get_cat_name($id);
+?>
+
+
