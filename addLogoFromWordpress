@@ -1,2 +1,9 @@
 add_theme_support( 'custom-header' ); // add to functions.php
 <?php echo get_header_image(); ?> // add to <img src='addHear'>
+
+//якщо немає картинки виводини назву сайту
+<?php if(has_header_image()) { 
+	  echo ('<img src="'.get_header_image().'">') ;
+} else {
+		bloginfo( 'name' ); 
+} ?>
