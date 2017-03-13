@@ -87,4 +87,13 @@ $id = $idObj->term_id;
 echo get_cat_name($id);
 ?>
 
+//додаємо logo через адмінку  // function.php  add_theme_support( 'custom-header' );
+<?php if(has_header_image()) { 
+		  	echo ('<img class="headerLogo" 
+		  		alt="'. get_bloginfo('name').'" 
+		  		src="'.get_header_image().'">') ;
+		} else {
+			bloginfo( 'name' ); 
+		} ?>
+
 
