@@ -112,4 +112,4 @@ echo get_cat_name($id);
 
 
 //Виводимо поле polylang раніше зареєстроване в function.php
-<?php echo pll_e('Записатися на примірку'); ?>
+<?php echo pll_e('Відгуки наших клієнтів'); ?>
