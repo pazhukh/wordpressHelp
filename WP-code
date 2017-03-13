@@ -89,11 +89,23 @@ echo get_cat_name($id);
 
 //додаємо logo через адмінку  // function.php  add_theme_support( 'custom-header' );
 <?php if(has_header_image()) { 
-		  	echo ('<img class="headerLogo" 
-		  		alt="'. get_bloginfo('name').'" 
-		  		src="'.get_header_image().'">') ;
-		} else {
-			bloginfo( 'name' ); 
-		} ?>
+	echo ('<img class="headerLogo" 
+		alt="'. get_bloginfo('name').'" 
+		src="'.get_header_image().'">') ;
+} else {
+	bloginfo( 'name' ); 
+} ?>
 
 
+
+//вставляємо меню polylang (перед тим реєструємо віджет в function.php і в адмінці перетягуємо віджет);
+<?php
+	if ( is_active_sidebar( 'custom-header-widget' ) ) :
+		dynamic_sidebar( 'custom-header-widget' ); 
+	endif; 
+?>
+
+//вставляємо наше меню з класом .desktopMenu
+<?php wp_nav_menu(array('theme_localion'=>'menu',
+ 'menu_class'=>'desktopMenu',
+  'container'=>'' )); ?>
