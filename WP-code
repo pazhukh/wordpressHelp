@@ -113,3 +113,10 @@ echo get_cat_name($id);
 
 //Виводимо поле polylang раніше зареєстроване в function.php
 <?php echo pll_e('Відгуки наших клієнтів'); ?>
+
+//виводимо одну статтю
+<?php $the_query = new WP_Query('p=212'); ?>
+<?php while  ($the_query->have_posts() ) : $the_query->the_post(); ?>
+	//контент
+<?php endwhile; ?>
+<?php wp_reset_postdata();?>
