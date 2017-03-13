@@ -109,3 +109,7 @@ echo get_cat_name($id);
 <?php wp_nav_menu(array('theme_localion'=>'menu',
  'menu_class'=>'desktopMenu',
   'container'=>'' )); ?>
+
+
+//Виводимо поле polylang раніше зареєстроване в function.php
+<?php echo pll_e('Записатися на примірку'); ?>
