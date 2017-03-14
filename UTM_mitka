@@ -1,0 +1,52 @@
+//вставляємо в head перед <html>
+
+<?php 
+$utm = $_GET['utm_campaign'];//ловим нашу utm мітку(utm_medium, utm_source, utm_campaign)
+
+if ($utm == 'vidding') {
+	$cookie_name = "utm";
+	$cookie_value = $utm;
+	setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); //кешуємо мітку, якщо вона нам підходить
+}
+
+if ($utm == 'night') {
+	$cookie_name = "utm";
+	$cookie_value = $utm;
+	setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");//кешуємо мітку, якщо вона нам підходить
+}
+
+?>
+
+
+//вставляємо перед нашим постом, який хочемо виводити в залежності від мітки
+<?php 
+			$utm = $_GET['utm_campaign']; //ловим мітку
+
+			if ($utm == 'vidding') { 
+				
+				$postId = 'p=215';
+
+			} elseif($utm == 'night') {
+
+				$postId = 'p=212';
+
+			} else {
+				if ($_COOKIE["utm"] == 'vidding') { // якщо немає мітки - дивимося в кеші браузера користувача
+					$postId = 'p=215';
+				}
+				elseif($_COOKIE["utm"] == 'night') {
+					$postId = 'p=212';
+				} else {
+					$postId = 'p=209';
+				}
+			}
+?>
+      
+      
+      
+// сам пост - виводить лише один пост по ID ('p=1')
+<?php $the_query = new WP_Query($postId); ?>
+<?php while  ($the_query->have_posts() ) : $the_query->the_post(); ?>
+  //контент
+<?php endwhile; ?>
+<?php wp_reset_postdata();?>
