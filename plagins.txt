@@ -3,6 +3,7 @@ Advanced Custom Fields
 Timber
 Smooth Scroll Up - стрілка вверх
 Responsive Lightbox by dFactory, Easy SwipeBox - перегляд фоток на сайті, можна слайдерувати на телефоні
+WonderPlagin Lightbox - лайтбокс відео і ін.
 foogalery - створюєш кльові галереї, а перглядаєш в стандартному плагіні або Easy SwipeBox
 TinyMCE Advanced - розширений текстовий редактор
 Polylang - багатомовний плагін
