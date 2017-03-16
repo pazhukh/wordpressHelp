@@ -3,18 +3,11 @@
 <?php 
 $utm = $_GET['utm_campaign'];//ловим нашу utm мітку(utm_medium, utm_source, utm_campaign)
 
-if ($utm == 'vidding') {
+if ($utm == 'wedding' || $utm == 'night') { // save utm in cookies
 	$cookie_name = "utm";
 	$cookie_value = $utm;
-	setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); //кешуємо мітку, якщо вона нам підходить
+	setcookie($cookie_name, $cookie_value, time() + (86400 * 7), "/"); //86400 = one day
 }
-
-if ($utm == 'night') {
-	$cookie_name = "utm";
-	$cookie_value = $utm;
-	setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");//кешуємо мітку, якщо вона нам підходить
-}
-
 ?>
 
 
