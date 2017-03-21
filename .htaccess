@@ -1,0 +1,18 @@
+//вигляд файлу .htaccess в wordpress
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /katana/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /katana/index.php [L]
+</IfModule>
+# END WordPress
+
+
+//давати всім дозвіл заходу в адмінку wordpress
+<Files wp-login.php>
+Order Deny,Allow
+Allow from all
+</Files>
