@@ -147,3 +147,18 @@ function show_content() {
     <p>In admin you will see CSS file called Change.css. In this file you can adjust line-height and letter-spacing for body text, and separately the same parameters for mobile menu text</p>
     <p>You can download a file with instructions for the links http://iai-tosaohtaha.org/wp-content/uploads/2017/03/Editing-Notes.docx</p>";
 }
+
+
+//додаємо свій віджет в dashboard
+add_action( 'wp_dashboard_setup', 'register_my_dashboard_widget' );
+function register_my_dashboard_widget() {
+     wp_add_dashboard_widget(
+          'my_dashboard_widget',
+          'My Dashboard Widget',
+          'my_dashboard_widget_display'
+     );
+  
+}
+function my_dashboard_widget_display() {
+    echo 'Hello, I am Mr. Widget';
+};
