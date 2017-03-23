@@ -24,13 +24,13 @@ Template Name: contact
 <?php the_title(); ?>
 
 //вставляє заголовок поточної сторінки
-<title><?php echo wp_get_document_title(); ?></title>
+<?php echo wp_get_document_title(); ?>
 
 //назва сайту
 <title><?php bloginfo('name')?></title>
+<meta name="description" content="<?php bloginfo('description'); ?>" />
 <?php echo get_bloginfo('name')?>
 //опис сайту
-<?php echo get_bloginfo('description')?>
 
 //вивід постів
 <?php if (have_posts()){
