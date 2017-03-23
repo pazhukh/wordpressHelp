@@ -134,3 +134,16 @@ echo get_cat_name($id);
 <ul>
 	<?php wp_list_categories( $args ); ?>
 </ul>
+
+
+//додаємо свій віджет в бокову панель адмінки
+add_action('admin_menu', 'change_interval');
+function change_interval() {
+    // Add a new top-level menu:
+    add_menu_page('Test Toplevel', 'Change intervals', 8, __FILE__, 'show_content');   
+}
+function show_content() {
+    echo "<h2>Change line-height and letter-spacing</h2>
+    <p>In admin you will see CSS file called Change.css. In this file you can adjust line-height and letter-spacing for body text, and separately the same parameters for mobile menu text</p>
+    <p>You can download a file with instructions for the links http://iai-tosaohtaha.org/wp-content/uploads/2017/03/Editing-Notes.docx</p>";
+}
