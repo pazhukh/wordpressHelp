@@ -5,8 +5,6 @@ header("Location: ".get_bloginfo('url'));
 exit();
 ?>
 
-
-
 //Шлях до картинки
 <img src="<?php bloginfo('template_url'); ?>/image/dropdown.png">
 
@@ -129,3 +127,10 @@ echo get_cat_name($id);
 	//контент
 <?php endwhile; ?>
 <?php wp_reset_postdata();?>
+
+
+
+//вивід списку категорій
+<ul>
+	<?php wp_list_categories( $args ); ?>
+</ul>
