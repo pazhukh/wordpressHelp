@@ -7,4 +7,5 @@ WonderPlagin Lightbox - лайтбокс відео і ін.
 foogalery - створюєш кльові галереї, а перглядаєш в стандартному плагіні або Easy SwipeBox
 TinyMCE Advanced - розширений текстовий редактор
 Polylang - багатомовний плагін
+CMS Tree Page View - в dashboard показує всі сторінки
 http://lokeshdhakar.com/projects/lightbox2/ - плагін для перегляду фотографій lightbox (підключаєш на локалці)
