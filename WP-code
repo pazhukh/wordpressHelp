@@ -162,3 +162,9 @@ function register_my_dashboard_widget() {
 function my_dashboard_widget_display() {
     echo 'Hello, I am Mr. Widget';
 };
+
+//redirect на кастомну сторінку (пишемо цей коди в 404.php)
+<?php
+wp_redirect('404error');
+exit;
+?>
