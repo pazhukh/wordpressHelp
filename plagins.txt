@@ -9,4 +9,5 @@ TinyMCE Advanced - розширений текстовий редактор
 Polylang - багатомовний плагін
 CMS Tree Page View - в dashboard показує всі сторінки
 Contact Form 7 - форма зворотнього звязку
+Insert Headers and Footers - міняти футер і хедер через адмінку
 http://lokeshdhakar.com/projects/lightbox2/ - плагін для перегляду фотографій lightbox (підключаєш на локалці)
