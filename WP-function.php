@@ -85,3 +85,17 @@ $category = get_category($category->category_parent);
 endif;
 }
 
+
+
+//додаємо можливість додавати ACF на панель в wordpress
+//в ACF вибираємо сторінка опцій = загальні дані
+//виводим поля <?php the_field('number1', 'option'); ?>
+if( function_exists('acf_add_options_page') ) {
+	acf_add_options_page(array(
+		'page_title' 	=> 'Загальні дані (поля які потрібно заповнити знаходяться в плагіні ACF)',
+		'menu_title'	=> 'Загальні дані',
+		'menu_slug' 	=> 'theme-general-settings',
+		'capability'	=> 'edit_posts',
+		'redirect'		=> false
+		));
+}
