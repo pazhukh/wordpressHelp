@@ -47,3 +47,41 @@ add_action( 'widgets_init', 'wpb_widgets_init' );
 
 //register polylang fields
 pll_register_string( 'Заголовок', 'Відгуки наших клієнтів', 'theme', false );
+
+
+
+
+//дочірні категорії беруть шаблон батьківської.
+//актуально для категорій та single.php
+//http://n-wp.ru/17536
+add_action('template_redirect', 'use_parent_category_template');
+function use_parent_category_template() {
+global $cat, $post;
+$category = get_category($cat);
+if (is_category()):
+while ($category->cat_ID) {
+        if ( file_exists(TEMPLATEPATH . "/category-" . $category->cat_ID . '.php') ) {
+            include(TEMPLATEPATH . "/category-" . $category->cat_ID . '.php');
+            exit;
+        }
+$category = get_category($category->category_parent);
+    }
+elseif (is_single()) :
+ 
+    $categories = get_the_category($post->ID);
+    
+    if (count($categories)) foreach ( $categories as $category ) {
+while ($category->cat_ID) {
+    	    if ( file_exists(TEMPLATEPATH . "/single-" . $category->cat_ID . '.php') ) {
+        	    include(TEMPLATEPATH . "/single-" . $category->cat_ID . '.php');
+            	exit;
+        }
+    	    
+$category = get_category($category->category_parent);
+    }
+    
+    }
+ 
+endif;
+}
+
