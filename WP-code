@@ -168,3 +168,8 @@ function my_dashboard_widget_display() {
 wp_redirect('404error');
 exit;
 ?>
+
+//виводим список всіх підкатегорій категорії у вигляді посилань з id 8
+<ul>
+  <?php wp_list_categories(array('child_of'=>8, 'title_li'=>'') ); ?>
+</ul>
