@@ -173,3 +173,11 @@ exit;
 <ul>
   <?php wp_list_categories(array('child_of'=>8, 'title_li'=>'') ); ?>
 </ul>
+
+//виводимо назви підкатегорії категорії з id 55, які має пост.(робимо це в циклі виводу постів)
+<?php
+foreach (get_categories(array('child_of'=>55, 'title_li'=>'') ) as $category){
+   if ( in_category($category->name) ) {
+      echo '<span>' . $category->name . '</span>';
+   }
+} ?>
