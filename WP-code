@@ -117,7 +117,6 @@ echo get_cat_name($id);
  'menu_class'=>'desktopMenu',
   'container'=>'' )); ?>
 
-
 //Виводимо поле polylang раніше зареєстроване в function.php
 <?php echo pll_e('Відгуки наших клієнтів'); ?>
 
@@ -141,7 +140,6 @@ function show_content() {
     <p>You can download a file with instructions for the links http://iai-tosaohtaha.org/wp-content/uploads/2017/03/Editing-Notes.docx</p>";
 }
 
-
 //додаємо свій віджет в dashboard
 add_action( 'wp_dashboard_setup', 'register_my_dashboard_widget' );
 function register_my_dashboard_widget() {
@@ -150,7 +148,6 @@ function register_my_dashboard_widget() {
           'My Dashboard Widget',
           'my_dashboard_widget_display'
      );
-  
 }
 function my_dashboard_widget_display() {
     echo 'Hello, I am Mr. Widget';
@@ -162,10 +159,12 @@ wp_redirect('404error');
 exit;
 ?>
 
+//вставляємо шорткод в php
+<?php echo do_shortcode('[contact-form-7 id="264" title="Залишити коментар"]') ?>
 
-//вивід списку категорій
+//вивід списку категорій у вигляді посилання
 <ul>
-	<?php wp_list_categories( $args ); ?>
+<?php wp_list_categories( $args ); ?>
 </ul>
 
 //виводим список всіх підкатегорій категорії у вигляді посилань з id 8
@@ -173,7 +172,7 @@ exit;
   <?php wp_list_categories(array('child_of'=>8, 'title_li'=>'') ); ?>
 </ul>
 
-//виводимо назви підкатегорії категорії з id 55
+//виводимо назви підкатегорії категорії з id 55(без посилань)
 foreach (get_categories(array('child_of'=>55, 'title_li'=>'') ) as $category){
   echo $category->name;
 } ?>
