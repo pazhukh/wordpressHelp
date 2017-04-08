@@ -129,13 +129,6 @@ echo get_cat_name($id);
 <?php wp_reset_postdata();?>
 
 
-
-//вивід списку категорій
-<ul>
-	<?php wp_list_categories( $args ); ?>
-</ul>
-
-
 //додаємо свій віджет в бокову панель адмінки
 add_action('admin_menu', 'change_interval');
 function change_interval() {
@@ -169,10 +162,21 @@ wp_redirect('404error');
 exit;
 ?>
 
+
+//вивід списку категорій
+<ul>
+	<?php wp_list_categories( $args ); ?>
+</ul>
+
 //виводим список всіх підкатегорій категорії у вигляді посилань з id 8
 <ul>
   <?php wp_list_categories(array('child_of'=>8, 'title_li'=>'') ); ?>
 </ul>
+
+//виводимо назви підкатегорії категорії з id 55
+foreach (get_categories(array('child_of'=>55, 'title_li'=>'') ) as $category){
+  echo $category->name;
+} ?>
 
 //виводимо назви підкатегорії категорії з id 55, які має пост.(робимо це в циклі виводу постів)
 <?php
