@@ -35,3 +35,6 @@ if( !empty($image) ): ?>
 
 //в index.php не працює АСF, потрібне додати додаткове поле    get_option('page_for_posts')
 <?php the_field('name_of_field', get_option('page_for_posts')); ?>
+
+//опис як вивести google карту з 1 або декількаома точками (якщо з декількома точками - jquery має бути в head)
+http://rightblog.ru/2038
