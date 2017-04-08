@@ -1,3 +1,4 @@
+https://www.addthis.com/ - вставляємо на сайт іконки соцмереж
 Custom Post Templates
 Advanced Custom Fields
 Timber
