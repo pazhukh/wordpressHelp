@@ -115,3 +115,28 @@ function create_post_type() {
     )
   );
 }
+
+//видалення slug з url в custom post type (коли використовуємо плагіни Custom Post Type UI, Toolset Types)
+function custom_remove_course_slug( $post_link, $post, $leavename ) {
+    if ( 'course' != $post->post_type || 'publish' != $post->post_status ) {
+        return $post_link;
+    }
+    $post_link = str_replace( '/' . $post->post_type . '/', '/', $post_link );
+    return $post_link;
+}
+add_filter( 'post_type_link', 'custom_remove_course_slug', 10, 3 );
+
+function gp_parse_request_trick( $query ) {
+    // Only noop the main query
+    if ( ! $query->is_main_query() )
+        return;
+    // Only noop our very specific rewrite rule match
+    if ( 2 != count( $query->query ) || ! isset( $query->query['page'] ) ) {
+        return;
+    }
+    // 'name' will be set if post permalinks are just post_name, otherwise the page rule will match
+    if ( ! empty( $query->query['name'] ) ) {
+        $query->set( 'post_type', array( 'course', 'bloging', 'university' ) );
+    }
+}
+add_action( 'pre_get_posts', 'gp_parse_request_trick' );
