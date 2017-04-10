@@ -1,0 +1,29 @@
+//виводимо всі підтерміни терміну з id 60 кастомної таксономії
+<?php
+foreach (get_terms('tax_name', array('child_of'=>60, 'hide_empty' => true) ) as $term){
+echo "<option value='".$term->slug."'>";
+echo $term->name;
+echo "</option>";
+} ?>
+
+//виводимо пости кастомної таксономії та кастомного типу посту
+<?php $the_query1 = new WP_Query(array( 
+				'post_type' => 'university',
+				'posts_per_page'=> -1,
+				'tax_query'=>array(array(
+					'taxonomy'=>'tax_name',
+					'field'=>'slug',
+					'terms'=>'term_slug'
+					)))); ?>
+					<?php while  ($the_query1->have_posts() ) : $the_query1->the_post(); ?>
+          //тіло циклу
+   <?php endwhile; ?>
+<?php wp_reset_postdata();?>
+
+//виводимов в циклі наприклад місто з таксономії tax_name яку має пост
+<?php 
+	foreach( get_the_terms($post->ID, 'tax_name') as $cur_term ){ 
+	if(has_term('', 'tax_name')){
+	echo $cur_term->name;
+}
+}?>
