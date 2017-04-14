@@ -5,6 +5,9 @@ header("Location: ".get_bloginfo('url'));
 exit();
 ?>
 
+//додає клас сторінкам(вставляємо в тег body)
+<?php body_class($class); ?>
+
 //Шлях до картинки
 <img src="<?php bloginfo('template_url'); ?>/image/dropdown.png">
 
