@@ -10,6 +10,7 @@ TinyMCE Advanced - розширений текстовий редактор
 Polylang - багатомовний плагін
 CMS Tree Page View - в dashboard показує всі сторінки
 Contact Form 7 - форма зворотнього звязку
+Contact Form Advance Database - зберігає листи з contact form 7
 Insert Headers and Footers - міняти футер і хедер через адмінку
 http://lokeshdhakar.com/projects/lightbox2/ - плагін для перегляду фотографій lightbox (підключаєш на локалці)
 WP Custom Post Template - створення кастомних шаблонів для виводу постів single-custom.php
