@@ -27,11 +27,17 @@ Template Name: contact
 //вставляє заголовок поточної сторінки
 <?php echo wp_get_document_title(); ?>
 
-//назва сайту
-<title><?php bloginfo('name')?></title>
-<meta name="description" content="<?php bloginfo('description'); ?>" />
-<?php echo get_bloginfo('name')?>
+
 //опис сайту
+<html <?php language_attributes(); ?>>
+<meta charset="<?php bloginfo( 'charset' ); ?>">
+<meta name="description" content="<?php bloginfo('description'); ?>" />
+//назва сайту
+<?php echo get_bloginfo('name')?>
+<title><?php bloginfo('name')?></title>
+
+
+
 
 //вивід постів
 <?php if (have_posts()){
