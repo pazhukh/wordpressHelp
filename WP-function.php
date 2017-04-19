@@ -32,6 +32,8 @@ add_action( 'wp_enqueue_scripts', 'theme_name_scripts' );
 add_theme_support('post-thumbnails'); 
 //logo через адмінку
 add_theme_support( 'custom-header' );
+//додаємо можливіість WP самому генерувати <title></title> (тег вже не потрібно давати в хедер)
+add_theme_support( 'title-tag' );
 
 
 //register polylang menu widget
@@ -47,8 +49,6 @@ add_action( 'widgets_init', 'wpb_widgets_init' );
 
 //register polylang fields
 pll_register_string( 'Заголовок', 'Відгуки наших клієнтів', 'theme', false );
-
-
 
 
 //дочірні категорії беруть шаблон батьківської.
