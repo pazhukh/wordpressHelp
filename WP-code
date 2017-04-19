@@ -1,3 +1,18 @@
+//віджети
+//function.php
+function polylangWidg() {
+	register_sidebar( array(
+		'name'          => 'Lang switcher',
+		'id'            => 'lang-switcher',
+		'before_widget' => '<div class="langSwitcher">',
+		'after_widget'  => '</div>',
+		) );
+}
+add_action( 'widgets_init', 'polylangWidg' );
+//місце в шаблоні куда вставляємо
+<?php dynamic_sidebar( 'lang-switcher' ); ?>
+
+
 //вставляємо в файл 404.php і це редиректить на головну сторінку сайту
 <?php
 header("HTTP/1.1 301 Moved Permanently");
