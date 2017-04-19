@@ -33,6 +33,9 @@ Template Name: contact
 */
 ?>
 
+посилання на сторінку з id 233
+//<a href="<?php echo get_permalink(233) ?>">Дивитись всі новини</a>
+
 //посилання на головну сторінку сайту
 <a href="<?php echo home_url(); ?>">
 
