@@ -141,3 +141,31 @@ function gp_parse_request_trick( $query ) {
     }
 }
 add_action( 'pre_get_posts', 'gp_parse_request_trick' );
+
+//віджети
+//function.php
+function polylangWidg() {
+	register_sidebar( array(
+		'name'          => 'Lang switcher',
+		'id'            => 'lang-switcher',
+		'before_widget' => '<div class="langSwitcher">',
+		'after_widget'  => '</div>',
+		) );
+}
+add_action( 'widgets_init', 'polylangWidg' );
+//місце в шаблоні куда вставляємо
+<?php dynamic_sidebar( 'lang-switcher' ); ?>
+
+//додавати посилання на іншу сторінку нашого сайта в редакторі
+function permalink_thingy($atts) {
+	extract(shortcode_atts(array('id'=>1, 'text'=>''), $atts));
+	if($text) {
+		$url = get_permalink($id);
+		return "<a href='$url'>$text</a>";
+	} else {
+		return get_permalink($id);
+	}
+}
+add_shortcode('link', 'permalink_thingy');
+//приклад коду який вставляємо в редактор
+<a href="[link id=233]">Blog</a>
