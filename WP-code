@@ -1,3 +1,13 @@
+//посторінкова навігація (плагін WP-PageNavi) http://scribu.net/wordpress/wp-pagenavi/wpn-2-74.html
+$my_query = new WP_Query( array( 'tag' => 'foo', 'paged' => get_query_var('paged') ) );
+while ( $my_query->have_posts() ) : $my_query->the_post();
+	the_title();
+	// more stuff here
+endwhile;
+wp_pagenavi( array( 'query' => $my_query ) );
+wp_reset_postdata();	// avoid errors further down the page
+
+
 //віджети
 //function.php
 function polylangWidg() {
