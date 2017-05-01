@@ -48,7 +48,9 @@ function wpb_widgets_init() {
 add_action( 'widgets_init', 'wpb_widgets_init' );
 
 //register polylang fields
-pll_register_string( 'Заголовок', 'Відгуки наших клієнтів', 'theme', false );
+pll_register_string( 'Заголовок', 'Текст', 'theme', false );
+//вивід рядка в файлі
+<?php pll_e('Текст'); ?>
 
 
 //дочірні категорії беруть шаблон батьківської.
