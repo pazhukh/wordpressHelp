@@ -40,6 +40,7 @@ if( !empty($image) ): ?>
 http://rightblog.ru/2038
 
 //taxonomy term (додати до категорій ще одне поле опису чи картинку додати)
+http://denis-creative.com/acf-on-the-taxonomy/
 $queried_object = get_queried_object(); 
 $taxonomy = $queried_object->taxonomy;
 $term_id = $queried_object->term_id;
