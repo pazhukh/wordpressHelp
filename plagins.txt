@@ -7,8 +7,9 @@ Responsive Lightbox by dFactory, Easy SwipeBox - перегляд фоток н�
 WonderPlagin Lightbox - лайтбокс відео і ін.
 foogalery - створюєш кльові галереї, а перглядаєш в стандартному плагіні або Easy SwipeBox
 TinyMCE Advanced - розширений текстовий редактор
-Polylang - багатомовний плагін
 CMS Tree Page View - в dashboard показує всі сторінки
+Polylang - багатомовний плагін
+Contact Form 7 Polylang extension - повязує polylang і contact form 7 (робимо форми для різних мов сайту)
 Contact Form 7 - форма зворотнього звязку
 Contact Form Advance Database - зберігає листи з contact form 7
 Insert Headers and Footers - міняти футер і хедер через адмінку
