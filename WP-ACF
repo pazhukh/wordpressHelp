@@ -38,3 +38,9 @@ if( !empty($image) ): ?>
 
 //опис як вивести google карту з 1 або декількаома точками (якщо з декількома точками - jquery має бути в head)
 http://rightblog.ru/2038
+
+//taxonomy term (додати до категорій ще одне поле опису чи картинку додати)
+$queried_object = get_queried_object(); 
+$taxonomy = $queried_object->taxonomy;
+$term_id = $queried_object->term_id;
+the_field('desc', $taxonomy . '_' . $term_id);
