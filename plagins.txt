@@ -21,3 +21,4 @@ Custom Post Type UI, Toolset Types -плагіни для створення к�
 No Category Base (WPML) - забирає слово category з url
 Breadcrumb NavXT - додаємо хлібні крихти
 WordPress Classifieds Plugin - тіпа OLX
+Limit Login Attempts - лімітує кількість спроб входу в WP admin
