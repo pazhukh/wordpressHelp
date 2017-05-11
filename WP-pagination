@@ -1,0 +1,33 @@
+//показуємо пагінацію при new WP_Query 
+//підсказка https://wordpress.stackexchange.com/questions/160175/pagination-on-a-wp-query-not-showing-navigation-links#answer-160177
+<?php 
+					$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+					$args = array(
+						'cat' => 8,
+						'posts_per_page' => 2,
+						'orderby' => 'date',
+						'post_type' => 'bloging',
+						'paged'=> $paged,						
+						);
+
+					$query = new WP_Query( $args );
+					global $wp_query;
+					$tmp_query = $wp_query;
+					$wp_query = null;
+					$wp_query = $query;
+					if ( $query->have_posts() ) {
+						while ( $query->have_posts() ) {  
+							$query->the_post(); ?>
+              
+              //body loop
+              
+              <?php }
+						} else {
+
+						}
+						the_posts_pagination();
+						wp_reset_postdata();
+						$wp_query = null;
+						$wp_query = $tmp_query;
+						?>
+              
