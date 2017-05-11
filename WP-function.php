@@ -170,3 +170,8 @@ function permalink_thingy($atts) {
 add_shortcode('link', 'permalink_thingy');
 //приклад коду який вставляємо в редактор
 <a href="[link id=233]">Blog</a>
+
+//створюємо нову таксономію (детальніше https://wp-kama.ru/function/register_taxonomy)
+register_taxonomy()
+//створюємо кастомний тип поста (детальніше https://wp-kama.ru/function/register_post_type)
+register_post_type()
