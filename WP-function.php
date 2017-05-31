@@ -34,6 +34,8 @@ add_theme_support('post-thumbnails');
 add_theme_support( 'custom-header' );
 //додаємо можливіість WP самому генерувати <title></title> (тег вже не потрібно давати в хедер)
 add_theme_support( 'title-tag' );
+//віджети
+add_theme_support( 'customize-selective-refresh-widgets' );
 
 
 //register polylang menu widget
