@@ -177,3 +177,24 @@ add_shortcode('link', 'permalink_thingy');
 register_taxonomy()
 //створюємо кастомний тип поста (детальніше https://wp-kama.ru/function/register_post_type)
 register_post_type()
+
+
+
+//функція яка вставляє поширення в соцмережі http://sharelinkgenerator.com/ https://simplesharebuttons.com/html-share-buttons/
+function share_this(){
+    $content .= '<div class="share_post">';
+        
+    $title = get_the_title();
+    $permalink = get_permalink();
+
+    $facebook = 'https://www.facebook.com/sharer/sharer.php?u=' . $permalink;
+    $vk = 'http://vk.com/share.php?url=' .$permalink . '';
+    $google = 'https://plus.google.com/share?url=' . $permalink;
+    $twitter = 'https://twitter.com/intent/tweet?text=Great post: ' . $title . '&amp;url=' . $permalink . '';
+      
+    $content .= '<a href="' . $facebook . '" target="_blank" rel="nofollow" class="share_img"><img src="../../wp-content/themes/bedrock-theme/assets/icons/face_white.png" class="social-icons white_icon"><img src="../../wp-content/themes/bedrock-theme/assets/icons/face_red.png" class="social-icons red_icon"></a>';
+    $content .= '<a href="' . $vk . '" target="_blank" rel="nofollow" class="share_img"><img src="../../wp-content/themes/bedrock-theme/assets/icons/vk_white.png" class="social-icons white_icon"><img src="../../wp-content/themes/bedrock-theme/assets/icons/vk_red.png" class="social-icons red_icon"></a>';
+    $content .= '</div>';
+    
+    return $content;  
+}
