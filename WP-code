@@ -1,3 +1,12 @@
+//New Query
+<?php $the_query1 = new WP_Query(array( 'category_name' => 'lang_schools',
+'posts_per_page'=> 3, 'orderby'=>'modified', 'post_type' => 'course' )); ?>
+			<?php while  ($the_query1->have_posts() ) : $the_query1->the_post(); ?>
+				тіло циклу
+			<?php endwhile; ?>
+			<?php wp_reset_postdata();?>
+
+
 //посторінкова навігація (плагін WP-PageNavi) http://scribu.net/wordpress/wp-pagenavi/wpn-2-74.html
 $my_query = new WP_Query( array( 'tag' => 'foo', 'paged' => get_query_var('paged') ) );
 while ( $my_query->have_posts() ) : $my_query->the_post();
