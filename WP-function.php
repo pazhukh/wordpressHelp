@@ -199,3 +199,23 @@ function share_this(){
     
     return $content;  
 }
+
+
+//Хлібні крихте Yoast seo
+https://sltaylor.co.uk/blog/adding-custom-post-type-landing-pages-yoast-breadcrumbs/
+додати в Function.php ось це, що показувало нормальну ієрархію хлібних крихт
+add_filter( 'wpseo_breadcrumb_links', 'my_wpseo_breadcrumb_links' );
+function my_wpseo_breadcrumb_links( $links ) {
+    if ( is_single() ) {
+        $cpt_object = get_post_type_object( get_post_type() );
+        if ( ! $cpt_object->_builtin ) {
+            $landing_page = get_page_by_path( $cpt_object->rewrite['slug'] );
+            array_splice( $links, -1, 0, array(
+                array(
+                    'id'    => $landing_page->ID
+                )
+            ));
+        }
+    }
+    return $links;
+}
