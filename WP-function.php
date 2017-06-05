@@ -121,6 +121,7 @@ function create_post_type() {
 }
 
 //видалення slug з url в custom post type (коли використовуємо плагіни Custom Post Type UI, Toolset Types)
+Налаштування постійних посилань повинно бути обовязково "Назва запису"
 //https://kellenmace.com/remove-custom-post-type-slug-from-permalinks/
 function custom_remove_course_slug( $post_link, $post, $leavename ) {
     if ( 'course' != $post->post_type || 'publish' != $post->post_status ) {
