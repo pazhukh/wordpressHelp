@@ -1,0 +1,61 @@
+function projects_post_type (){
+  $labels = array(
+      'name'                => __( 'Проекти', 'bedrock' ),
+      'singular_name'       => __( 'Проект', 'bedrock' ),
+      'search_items'        => __( 'Пошук', 'bedrock' ),
+      'all_items'           => __( 'Всі проекти', 'bedrock' ),
+      'edit_item'           => __( 'Редагувати проект', 'bedrock' ),
+      'update_item'         => __( 'Оновити проект', 'bedrock' ),
+      'add_new_item'        => __( 'Додати проект', 'bedrock' ),
+      'new_item_name'       => __( 'Заголовок', 'bedrock' ),
+      'menu_name'           => __( 'Проекти', 'bedrock' )
+  );
+  $args = array(
+      'labels'                => $labels,
+      'public'                => true,
+      'publicly_queryable'    => true,
+      'show_ui'               => true,
+      'show_in_menu'          => true,
+      'menu_icon'             => _('dashicons-format-aside'),
+      'query_var'             => true,
+      'capability_type'       => 'post',
+      'has_archive'           => false,
+      'hierarchical'          => false,
+      'supports'              => array('title', 'author', 'editor', 'page-attributes'),
+      'rewrite'               => array('slug'=>'proekty',)
+  );
+
+  register_post_type( 'projects', $args );
+}
+add_action( 'init', 'projects_post_type', 0 );
+
+function add_projects_category() {
+ $labels = array(
+   'name'                        => 'Категорії',
+   'singular_name'               => 'Fields',
+   'search_items'                => 'Пошук',
+   'popular_items'               => 'Популярні',
+   'all_items'                   => 'Всі',
+   'parent_item'                 => null,
+   'parent_item_colon'           => null,
+   'edit_item'                   => 'Редагувати',
+   'update_item'                 => 'Оновити',
+   'add_new_item'                => 'Додати нову категорію',
+   'new_item_name'               => 'Нова категорія',
+   'separate_items_with_commas'  => 'Separate',
+   'add_or_remove_items'         => 'Додати чи видалити',
+   'choose_from_most_used'       => 'Choose from most used ',
+   'menu_name'                   => 'Категорії',
+ );
+ $args = array(
+   'hierarchical'          => true,
+   'labels'                => $labels,
+   'show_ui'               => true,
+   'show_admin_column'     => true,
+   'update_count_callback' => '_update_post_term_count',
+   'query_var'             => true,
+   'rewrite'               => array( 'slug' => 'projects_category'),
+ );
+ register_taxonomy('projects_category', array( 'projects'), $args);
+}
+add_action( 'init', 'add_projects_category',0);
