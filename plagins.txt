@@ -6,6 +6,7 @@ Smooth Scroll Up - стрілка вверх
 Responsive Lightbox by dFactory, Easy SwipeBox - перегляд фоток на сайті, можна слайдерувати на телефоні
 WonderPlagin Lightbox - лайтбокс відео і ін.
 foogalery - створюєш кльові галереї, а перглядаєш в стандартному плагіні або Easy SwipeBox
+Smush Image Compression and Optimization - оптимізує фотографії
 TinyMCE Advanced - розширений текстовий редактор
 CMS Tree Page View - в dashboard показує всі сторінки
 Polylang - багатомовний плагін
