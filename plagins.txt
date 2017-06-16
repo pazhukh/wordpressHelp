@@ -20,6 +20,6 @@ Single Post Template - створення кастомних шаблонів д
 Cyr to Lat enhanced - url на латинську мову міняє
 Custom Post Type UI, Toolset Types -плагіни для створення кастомних типів постів
 No Category Base (WPML) - забирає слово category з url
-Breadcrumb NavXT - додаємо хлібні крихти
+Breadcrumb NavXT - додаємо хлібні крихти http://codetraveler.net/wp-breadcrumb-navxt-support-polylang/ - підтримка Polylang
 WordPress Classifieds Plugin - тіпа OLX
 Limit Login Attempts - лімітує кількість спроб входу в WP admin
