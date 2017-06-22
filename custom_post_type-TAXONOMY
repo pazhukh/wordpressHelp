@@ -59,3 +59,18 @@ function add_projects_category() {
  register_taxonomy('projects_category', array( 'projects'), $args);
 }
 add_action( 'init', 'add_projects_category',0);
+
+//міняти слаг,якщо мова російська наприклад
+function novelty_post_type (){
+	$labels = array(
+		);
+	$args = array(
+		'rewrite'               => array('slug'=>'novynky')
+		);
+	if (pll_current_language() == 'ru'){
+		$args['rewrite'] = array('slug'=>'novinki');
+	} 
+	register_post_type( 'novelty_pt', $args );
+	flush_rewrite_rules();
+}
+add_action( 'init', 'novelty_post_type', 0 );
