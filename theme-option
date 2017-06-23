@@ -202,3 +202,130 @@ function theme_options_validate( $input ) {
 
 щоб підключити файлик, в function.php пишемо 
 require_once ( get_stylesheet_directory() . '/theme-option.php');
+
+
+
+*********************************************************************************************************************************************************************************************
+
+
+//скорочений варіант лише з кольорами
+1) Створюємо папку theme-options і в ній файлик theme-options.php а в файлик закидаємо наступний код:
+<?php
+add_action( 'admin_init', 'theme_options_init' );
+add_action( 'admin_menu', 'theme_options_add_page' );
+/**
+ * Init plugin options to white list our options
+ */
+function theme_options_init(){
+	register_setting( 'sample_options', 'sample_theme_options', 'theme_options_validate' );
+}
+/**
+ * Load up the menu page
+ */
+function theme_options_add_page() {
+	add_theme_page( __( 'Налаштування нашої теми', 'sampletheme' ), __( 'Налаштування нашої теми', 'sampletheme' ), 'edit_theme_options', 'theme_options', 'theme_options_do_page' );
+}
+/**
+ * Create arrays for our select and radio options
+ */
+$select_options = array(
+	'style' => array(
+		'value' =>	'style',
+		'label' => __( 'Стандартний', 'sampletheme' )
+	),
+	'blue' => array(
+		'value' =>	'blue',
+		'label' => __( 'Blue', 'sampletheme' )
+	),
+	'pink' => array(
+		'value' =>	'pink',
+		'label' => __( 'Pink', 'sampletheme' )
+	),
+	'purple' => array(
+		'value' => 'purple',
+		'label' => __( 'Purple', 'sampletheme' )
+	)
+);
+
+/**
+ * Create the options page
+ */
+function theme_options_do_page() {
+	global $select_options;
+	if ( ! isset( $_REQUEST['settings-updated'] ) )
+		$_REQUEST['settings-updated'] = false;
+	?>
+	<div class="wrap">
+		<?php screen_icon(); echo "<h2>" . get_current_theme() . __( ' Налаштування теми', 'sampletheme' ) . "</h2>"; ?>
+
+		<?php if ( false !== $_REQUEST['settings-updated'] ) : ?>
+		<div class="updated fade"><p><strong><?php _e( 'Options saved', 'sampletheme' ); ?></strong></p></div>
+		<?php endif; ?>
+
+		<form method="post" action="options.php">
+			<?php settings_fields( 'sample_options' ); ?>
+			<?php $options = get_option( 'sample_theme_options' ); ?>
+
+			<table class="form-table">
+
+				<?php
+				/**
+				 * A sample select input option
+				 */
+				?>
+				<tr valign="top"><th scope="row"><?php _e( 'Вибрати колір', 'sampletheme' ); ?></th>
+					<td>
+						<select name="sample_theme_options[selectinput]">
+							<?php
+								$selected = $options['selectinput'];
+								$p = '';
+								$r = '';
+								foreach ( $select_options as $option ) {
+									$label = $option['label'];
+									if ( $selected == $option['value'] ) // Make default first in list
+										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+									else
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+								}
+								echo $p . $r;
+							?>
+						</select>
+					</td>
+				</tr>
+
+			</table>
+
+			<p class="submit">
+				<input type="submit" class="button-primary" value="<?php _e( 'Save Options', 'sampletheme' ); ?>" />
+			</p>
+		</form>
+	</div>
+	<?php
+}
+/**
+ * Sanitize and validate input. Accepts an array, return a sanitized array.
+ */
+function theme_options_validate( $input ) {
+	global $select_options, $radio_options;
+
+	if ( ! array_key_exists( $input['selectinput'], $select_options ) )
+		$input['selectinput'] = null;
+
+	return $input;
+}
+
+***************************************
+
+2) В functions.php підключаємо наш файлик наступним кодом
+require_once ( get_stylesheet_directory() . '/theme-options/theme-options.php');
+
+3) В functions.php коли підключаємо наші стилі, то підключаємо кольори наступним чином:
+
+function option(){
+	return get_option('sample_theme_options')['selectinput'];
+}
+wp_enqueue_style( 'style', get_template_directory_uri() . '/' . option() . '.css' );
+(в коріні теми мають бути файлики з нашими стилями: style.css, blue.css,  pink.css, purple.css);
+
+ПІсля цього можна вибирати колір(файлик зі стилями css) який хочемо бачити на сайті
+https://youtu.be/IlGpzU6--dY?t=37m4s
