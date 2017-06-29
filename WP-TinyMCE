@@ -1,6 +1,8 @@
 all code add to function php
 
 //adding new fonts to TinyMCE 
+http://learn.wpeditpro.com/adding-new-wordpress-tinymce-fonts/
+
 function load_custom_fonts($init) {
     $stylesheet_url = 'http://client.it-kitchen.com.ua/mebus/wp-content/themes/mebus/css/custom-fonts.css';
     if(empty($init['content_css'])) {
