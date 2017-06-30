@@ -5,9 +5,13 @@
 <?php $img_id = get_post_thumbnail_id(get_the_ID()); ?>
 <?php $title_text = get_the_title($img_id) ?>
 <?php  echo $title_tex ?>
+or
+$title = get_post(get_post_thumbnail_id())->post_title; //The Title
 
 // output thumbnail caption 
 <?php echo the_post_thumbnail_caption() ?>
+or
+$caption = get_post(get_post_thumbnail_id())->post_excerpt; //The Caption
 
 // output thumbnail alt text 
 <?php $img_id = get_post_thumbnail_id(get_the_ID()); ?>
@@ -18,5 +22,5 @@
 <?php $img_id = get_post_thumbnail_id(get_the_ID()); ?>
 <?php $disc_text = get_post_field('post_content', $img_id) ?>
 <?php  echo $disc_text ?>
-
-
+or
+$description = get_post(get_post_thumbnail_id())->post_content; // The Description
