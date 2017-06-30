@@ -31,7 +31,7 @@ add_action( 'wp_enqueue_scripts', 'theme_name_scripts' );
 //thumbnails in posts
 add_theme_support('post-thumbnails'); 
 //logo через адмінку
-add_theme_support( 'custom-header' );
+add_theme_support( 'custom-header' ); //додає картинку та color
 //додаємо можливіість WP самому генерувати <title></title> (тег вже не потрібно давати в хедер)
 add_theme_support( 'title-tag' );
 //віджети
