@@ -24,3 +24,5 @@ No Category Base (WPML) - забирає слово category з url
 Breadcrumb NavXT - додаємо хлібні крихти http://codetraveler.net/wp-breadcrumb-navxt-support-polylang/ - підтримка Polylang
 WordPress Classifieds Plugin - тіпа OLX
 Limit Login Attempts - лімітує кількість спроб входу в WP admin
+Theme to Browser (T2B) Control - міняти теми для різних браузерів(IE, Firefox, Opera...)
+Any Mobile Theme Switcher - міняти теми для різних мобільних пристроїв (Android, Windows Mobile, Opera Mini...)
