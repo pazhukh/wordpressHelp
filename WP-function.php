@@ -5,11 +5,13 @@ remove_action ('wp_head', 'wlwmanifest_link');
 remove_action ('wp_head', 'wp_generator');
 show_admin_bar(false);
 
+********************************************************************  
 
 // Header menu
 register_nav_menus( array(
-	'menu'));
-  
+	'menu');
+
+********************************************************************  
   
 //реєструємо наші скріпти в футер та стилі
 function theme_name_scripts() {
@@ -29,7 +31,44 @@ function theme_name_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'theme_name_scripts' );
 
+або 
+
+// style & scripts
+add_action('wp_enqueue_scripts', 'load_style_scripts');
+function load_style_scripts()
+{
+    $source_path = get_template_directory_uri() . '/design/css/';
+
+    $styles = [
+        'style',
+        'font-awesome',
+    ];
+
+    foreach($styles as $file_name)
+        wp_enqueue_style($file_name, $source_path . $file_name . '.css');
+}
+
+// style & scripts
+add_action('wp_enqueue_scripts', 'my_scripts_method');
+function my_scripts_method()
+{
+    $source_path = get_template_directory_uri() . '/design/js/';
+
+    $scripts = [
+        'jquery-1.11.2.min',
+        'helium.parallax',
+        'custom',
+    ];
+
+    foreach($scripts as $file_name)
+        wp_enqueue_script($file_name, $source_path . $file_name . '.js');
+}
+
+********************************************************************
+
 jQuery(function ($) {}
+
+************************************************************************
 
 //thumbnails in posts
 add_theme_support('post-thumbnails'); 
