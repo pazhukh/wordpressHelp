@@ -273,3 +273,25 @@ register_sidebar([
 ]);
 //виводимо в адмінці (записуємо в шаблоні)
 <?php dynamic_sidebar('header_contacts'); ?>
+
+*********************************************************************************************
+
+// Фикс блока навигации темы, когда активирован admin-bar
+add_theme_support( 'admin-bar', array( 'callback' => 'customAdminBarStyles' ) );
+function customAdminBarStyles()
+{
+ ?>
+<style type="text/css" media="screen">
+    html { margin-top: 32px !important; }
+    * html body { margin-top: 32px !important; }
+    header.fixed .nav { top: 62px; }
+    header.fixed .infoBar { top: 32px; }
+    @media screen and ( max-width: 782px ) {
+        html { margin-top: 46px !important; }
+        * html body { margin-top: 46px !important; }
+        header.fixed .nav { top: 76px; }
+        header.fixed .infoBar { top: 46px; }
+    }
+</style>
+<?php
+}
