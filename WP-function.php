@@ -261,3 +261,15 @@ function my_wpseo_breadcrumb_links( $links ) {
     }
     return $links;
 }
+
+****************************************************************************************************
+//реєструємо сайд бар
+register_sidebar([
+    'id'          => 'header_main_text',
+    'name'        => 'Шапка',
+    'description' => 'Текст в шапке на главной',
+    'before_widget' => '',
+    'after_widget'  => '',
+]);
+//виводимо в адмінці (записуємо в шаблоні)
+<?php dynamic_sidebar('header_contacts'); ?>
