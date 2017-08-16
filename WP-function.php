@@ -148,19 +148,37 @@ if( function_exists('acf_add_options_page') ) {
 
 
 //реєстрація Custom Post Types (щоб розділяти записи)
-add_action( 'init', 'create_post_type' );
-function create_post_type() {
-  register_post_type( 'acme_product',
-    array(
-      'labels' => array(
-        'name' => __( 'Products' ),
-        'singular_name' => __( 'Product' )
-      ),
-      'public' => true,
-      'has_archive' => true,
-    )
-  );
+function projects_post_type (){
+	$labels = array(
+		'name'                => __( 'Проекти', 'mebus' ),
+		'singular_name'       => __( 'Проект', 'mebus' ),
+		'search_items'        => __( 'Пошук', 'mebus' ),
+		'all_items'           => __( 'Всі проекти', 'mebus' ),
+		'edit_item'           => __( 'Редагувати проект', 'mebus' ),
+		'update_item'         => __( 'Оновити проект', 'mebus' ),
+		'add_new_item'        => __( 'Додати проект', 'mebus' ),
+		'new_item_name'       => __( 'Заголовок', 'mebus' ),
+		'menu_name'           => __( 'Проекти', 'mebus' )
+		);
+	$args = array(
+		'labels'                => $labels,
+		'public'                => true,
+		'publicly_queryable'    => true,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+		'menu_icon'             => _('dashicons-hammer'),
+		'query_var'             => true,
+		'capability_type'       => 'post',
+		'has_archive'           => false,
+		'hierarchical'          => false,
+		'supports'              => array('title', 'author', 'editor', 'page-attributes'),
+		'rewrite'               => array('slug'=>'proekty')
+		);
+	register_post_type( 'projects_cpt', $args );
 }
+add_action( 'init', 'projects_post_type', 0 );
+
+*********************************************************************
 
 //видалення slug з url в custom post type (коли використовуємо плагіни Custom Post Type UI, Toolset Types)
 Налаштування постійних посилань повинно бути обовязково "Назва запису"
