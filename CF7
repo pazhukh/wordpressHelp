@@ -1,3 +1,6 @@
 //забрати додавання br і p 
 //запихаємо в WP-config
 define('WPCF7_AUTOP', false );
+
+//додаємо атрибут placeholder
+placeholder"Електронна пошта"
