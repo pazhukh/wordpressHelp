@@ -89,8 +89,7 @@ Template Name: contact
 <?php the_post_thumbnail('full' картику вставляє); ?>
 <a href='<?php the_permalink(); ?>'></a>
 <?php the_excerpt()?>
-<?php the_time('g:i:s'); ?>
-<?php echo get_the_date('m.d'); ?>
+<?php the_time(); ?> //https://wp-kama.ru/id_7433/formaty-daty-i-vremeni-v-wordpress.html
 
 **********************************************************************************************************************
 
