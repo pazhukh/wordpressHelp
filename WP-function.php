@@ -313,3 +313,25 @@ function customAdminBarStyles()
 </style>
 <?php
 }
+
+************************************************************************************************************
+	
+//instal and show excerpt length
+function excerpt_count_js(){
+	if ('page' != get_post_type()) {
+		echo '<script>jQuery(document).ready(function(){
+			jQuery("#postexcerpt .handlediv").after("<div style=\"position:absolute;top:12px;right:34px;color:#666;\"><small>Довжина уривка: </small><span id=\"excerpt_counter\"></span><span style=\"font-weight:bold; padding-left:7px;\">/ 175</span><small><span style=\"font-weight:bold; padding-left:7px;\">character(s).</span></small></div>");
+			jQuery("span#excerpt_counter").text(jQuery("#excerpt").val().length);
+			jQuery("#excerpt").keyup( function() {
+				if(jQuery(this).val().length > 175){
+					jQuery(this).val(jQuery(this).val().substr(0, 175));
+				}
+				jQuery("span#excerpt_counter").text(jQuery("#excerpt").val().length);
+			});
+		});</script>';
+	}
+}
+add_action( 'admin_head-post.php', 'excerpt_count_js');
+add_action( 'admin_head-post-new.php', 'excerpt_count_js');
+
+********************************************************************************************************
