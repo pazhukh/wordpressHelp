@@ -90,6 +90,7 @@ Template Name: contact
 <a href='<?php the_permalink(); ?>'></a>
 <?php the_excerpt()?>
 <?php the_time('g:i:s'); ?>
+<?php echo get_the_date('m.d'); ?>
 
 **********************************************************************************************************************
 
