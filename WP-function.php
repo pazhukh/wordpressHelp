@@ -335,3 +335,18 @@ add_action( 'admin_head-post.php', 'excerpt_count_js');
 add_action( 'admin_head-post-new.php', 'excerpt_count_js');
 
 ********************************************************************************************************
+//pagination
+// <?php  the_posts_pagination( $args );?>
+
+//remove h2 tag from pagination
+function sanitize_pagination($content) {
+// Remove role attribute
+$content = str_replace('role="navigation"', '', $content);
+
+// Remove h2 tag
+$content = preg_replace('#<h2.*?>(.*?)<\/h2>#si', '', $content);
+
+return $content;
+}
+add_action('navigation_markup_template', 'sanitize_pagination');
+	
