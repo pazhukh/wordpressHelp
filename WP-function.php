@@ -79,6 +79,19 @@ add_theme_support( 'title-tag' );
 //віджети
 add_theme_support( 'customize-selective-refresh-widgets' );
 
+*********************************************************************************
+
+//задаємо щоб різало картинки під такі розміри як треба
+add_image_size( 'prod-prew', 180, 120, true );
+//в шаблоні пишемо наступне
+the_post_thumbnail( 'custom-size' );
+//другий варіант
+    if ( has_post_thumbnail() ) {
+the_post_thumbnail(array(1024, 512, true), array('class' => 'img-responsive')); // add post thumbnail
+    }
+
+*********************************************************************************
+
 
 //register polylang menu widget
 function wpb_widgets_init() {
