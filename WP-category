@@ -1,0 +1,2 @@
+//в single.php виводить категорії до яких відноситься пост
+<?php the_category(' > ', 'multiple'); ?>
