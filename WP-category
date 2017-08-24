@@ -1,2 +1,65 @@
 //в single.php виводить категорії до яких відноситься пост
 <?php the_category(' > ', 'multiple'); ?>
+
+*************************************************************
+
+//в category.php якщо дана категорія має дочірні категорії\
+//руєструємо в functions.php
+function category_has_children( $term_id = 0, $taxonomy = 'category' ){
+	$children = get_categories( array( 
+		'child_of'      => $term_id,
+		'taxonomy'      => $taxonomy,
+		'hide_empty'    => false,
+		'fields'        => 'ids',
+		) );
+	return ( $children );
+}
+
+//вставляємо в category.php
+if(category_has_children($cat) ){}
+
+*************************************************************
+
+//показуємо в шаблоні всі категорії першого рівня (посилання, картинка ACF, назва, опис)
+$args = array(
+	'orderby' => 'name',
+	'parent' => 0
+	);
+$categories = get_categories( $args );
+foreach ( $categories as $category ) {
+
+	echo '<article class="brands-item">
+	<a href="' . get_category_link( $category->term_id ) . '">
+		<img src="' . get_field('preview_img', $category->taxonomy . '_' . $category->term_id)['url'] .'" alt="' . get_field('preview_img', $taxonomy . '_' . $term_id)['title'] .'">
+		<h3>' . $category->name . '</h3>
+		<p>' . $category->description . '</p>
+	</a> 
+</article>';
+}
+
+*********************************************************************
+
+<?php  
+//category.php показуємо всі дочірні категорії до категорії, на якій ми зараз є(посилання, картинка ACF, назва, кіслькість постів)
+
+$args = array(
+	'hierarchical' => 1,
+	'show_option_none' => '',
+	'hide_empty' => 1,
+	'parent' => $cat,
+
+	);
+$subcats = get_categories($args);
+
+foreach ($subcats as $sc) {
+	$link = get_term_link( $sc->slug, $sc->taxonomy );
+
+	echo '<article class="prod-cat-item">
+	<a href="'. $link .'">
+		<img src="' . get_field('preview_img', $sc->taxonomy . '_' . $sc->term_id)['url'] .'" alt="' . get_field('preview_img', $sc->taxonomy . '_' . $sc->term_id)['title'] .'">
+		<h3 class="name">'. $sc->name .'</h3>
+		<mark class="count">('. $sc->category_count .')</mark>
+	</a>
+</article>';
+}
+?>
