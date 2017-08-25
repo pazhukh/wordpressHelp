@@ -63,3 +63,16 @@ foreach ($subcats as $sc) {
 </article>';
 }
 ?>
+
+*********************************************************************************
+
+//вивести категорії (terms) кастомного типу поста, до якого належить
+$terms = get_the_terms($post->ID, 'vacansions_post_type' );
+if ($terms && ! is_wp_error($terms)) :
+$tslugs_arr = array();
+foreach ($terms as $term) {
+$tslugs_arr[] = $term->name;
+}
+$terms_slug_str = join( ", ", $tslugs_arr);
+endif;
+?>
