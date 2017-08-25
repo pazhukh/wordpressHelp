@@ -2,12 +2,10 @@ function projects_post_type (){
   $labels = array(
       'name'                => __( 'Проекти', 'bedrock' ),
       'singular_name'       => __( 'Проект', 'bedrock' ),
-      'search_items'        => __( 'Пошук', 'bedrock' ),
       'all_items'           => __( 'Всі проекти', 'bedrock' ),
       'edit_item'           => __( 'Редагувати проект', 'bedrock' ),
       'update_item'         => __( 'Оновити проект', 'bedrock' ),
       'add_new_item'        => __( 'Додати проект', 'bedrock' ),
-      'new_item_name'       => __( 'Заголовок', 'bedrock' ),
       'menu_name'           => __( 'Проекти', 'bedrock' )
   );
   $args = array(
@@ -17,6 +15,7 @@ function projects_post_type (){
       'show_ui'               => true,
       'show_in_menu'          => true,
       'menu_icon'             => _('dashicons-format-aside'),
+      'menu_position'         => 5,
       'query_var'             => true,
       'capability_type'       => 'post',
       'has_archive'           => false,
