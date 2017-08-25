@@ -67,13 +67,20 @@ foreach ($subcats as $sc) {
 *********************************************************************************
 
 //вивести категорії (terms) кастомного типу поста, до якого належить
-$terms = get_the_terms($post->ID, 'vacansions_post_type' );
-if ($terms && ! is_wp_error($terms)) :
-$tslugs_arr = array();
-foreach ($terms as $term) {
-$tslugs_arr[] = $term->name;
+//get vacation terms
+$categories = get_categories( $args );
+$args = array(
+	'child_of'     => 12,
+	'taxonomy'     => 'vacansions_post_type'
+	);
+
+$categories = get_categories( $args );
+$cat_name = array();
+if( $categories ){
+	foreach( $categories as $category ){
+		if(has_term($category->cat_ID, 'vacansions_post_type')){
+			$cat_name[] = $category->name;
+		}
+	}
+	$cat_name_str = join( ", ", $cat_name);
 }
-$terms_slug_str = join( ", ", $tslugs_arr);
-endif;
-echo $terms_slug_str;
-?>
