@@ -75,4 +75,5 @@ $tslugs_arr[] = $term->name;
 }
 $terms_slug_str = join( ", ", $tslugs_arr);
 endif;
+echo $terms_slug_str;
 ?>
