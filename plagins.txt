@@ -12,7 +12,7 @@ CMS Tree Page View - в dashboard показує всі сторінки
 Polylang - багатомовний плагін
 Contact Form 7 Polylang extension - повязує polylang і contact form 7 (робимо форми для різних мов сайту)
 Contact Form 7 - форма зворотнього звязку
-Contact Form Advance Database - зберігає листи з contact form 7
+Save Contact Form 7 - зберігає листи з contact form 7
 Contact Form 7 - спеціальні теги в лист https://contactform7.com/special-mail-tags/
 Insert Headers and Footers - міняти футер і хедер через адмінку
 http://lokeshdhakar.com/projects/lightbox2/ - плагін для перегляду фотографій lightbox (підключаєш на локалці)
