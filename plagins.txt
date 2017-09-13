@@ -26,3 +26,4 @@ WordPress Classifieds Plugin - тіпа OLX
 Limit Login Attempts - лімітує кількість спроб входу в WP admin
 Theme to Browser (T2B) Control - міняти теми для різних браузерів(IE, Firefox, Opera...)
 Any Mobile Theme Switcher - міняти теми для різних мобільних пристроїв (Android, Windows Mobile, Opera Mini...)
+Optimize Database after Deleting Revisions, WP-Optimize - оптимізуємо базу даних
