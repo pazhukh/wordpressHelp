@@ -25,7 +25,7 @@
 						} else {
 
 						}
-						the_posts_pagination();
+						the_posts_pagination( array('next_text'=>'', 'prev_text'=> '') )
 						wp_reset_postdata();
 						$wp_query = null;
 						$wp_query = $tmp_query;
