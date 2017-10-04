@@ -95,7 +95,7 @@ Template Name: contact
 
 //ріжемо тексти
 <?php echo wp_trim_words( get_the_content(), 15, '...' ); ?>
-<?php echo mb_substr(get_the_content(), 0, 175,'UTF-8'); ?>
+<?php echo strip_tags(mb_substr(get_the_content(), 0, 175,'UTF-8')); ?>
 
 **********************************************************************************************************************
 
