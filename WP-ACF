@@ -69,7 +69,7 @@ the_field('desc', $taxonomy . '_' . $term_id);
 ************************************************************************************************
 
 //запихайємо неперекладені тексти в Theme options
-
+https://support.advancedcustomfields.com/forums/topic/options-page-polylang/
 if( function_exists('acf_add_options_page') ) {
 	
 	acf_add_options_page(array(
