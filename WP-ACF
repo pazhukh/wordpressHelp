@@ -64,3 +64,34 @@ $queried_object = get_queried_object();
 $taxonomy = $queried_object->taxonomy;
 $term_id = $queried_object->term_id;
 the_field('desc', $taxonomy . '_' . $term_id);
+
+
+************************************************************************************************
+
+//запихайємо неперекладені тексти в Theme options
+
+if( function_exists('acf_add_options_page') ) {
+	
+	acf_add_options_page(array(
+		'page_title' 	=> 'Додаткова інформація',
+		'menu_title'	=> 'Додаткова інформація',
+		'menu_slug' 	=> 'theme-general-settings',
+		'capability'	=> 'edit_posts',
+		'redirect'		=> false
+	));
+
+	foreach (['uk', 'en', 'de'] as $lang) { //додаємо в список слаги мов, на якіх є наш сайт
+
+		acf_add_options_sub_page([
+			'page_title' => $lang,
+			'menu_title' => $lang,
+			'menu_slug' => "page-name-" . $lang,
+			'post_id' => $lang,
+			'parent_slug'	=> 'theme-general-settings'
+		]);
+
+	}
+}
+//виводимо текст 
+<?php the_field('field_slug', pll_current_language('slug')); ?>
+
