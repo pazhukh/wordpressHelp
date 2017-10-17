@@ -383,3 +383,26 @@ function hide_editor() {
     remove_post_type_support('page', 'editor');
   }
 }
+
+*********************************************************************************************************************
+	
+//add widget to pages Site Editing Notes
+function custom_meta_box_markup(){
+    echo '<a href="' . get_site_url() . '/wp-content/uploads/Site-Editing-Notes.pdf" target="_blank">Open notes</a>';
+}
+function add_custom_meta_box(){
+    add_meta_box("demo-meta-box", "Site Editing Notes", "custom_meta_box_markup", "page", "side", "default", null);
+}
+add_action("add_meta_boxes", "add_custom_meta_box");
+
+//add widget to dashboard Site Editing Notes
+add_action('wp_dashboard_setup', 'my_custom_dashboard_widgets');
+function my_custom_dashboard_widgets() {
+global $wp_meta_boxes;
+wp_add_dashboard_widget('custom_help_widget', 'Site Editing Notes', 'custom_dashboard_help');
+}
+function custom_dashboard_help() {
+echo '<p><a href="' . get_site_url() . '/wp-content/uploads/Site-Editing-Notes.pdf" target="_blank">Open notes</a></p>';
+}
+	
+*********************************************************************************************************************
