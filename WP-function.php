@@ -416,3 +416,26 @@ function init_remove_support(){
 		
 *********************************************************************************************************************
 
+//Поміняти лого на сторінці входу в адмінку wp-login.php
+https://wp-kama.ru/id_7675/frontend-15-hukov-dlya-functions-php.html#izmenenie-kartinki-na-stranitse-vhoda---wp-login.php
+add_action( 'login_head', 'wp_login_logo_img_url' );
+function wp_login_logo_img_url() {
+	if( function_exists('get_custom_header') ){
+		$width = get_custom_header()->width;
+		$height = get_custom_header()->height;
+	}
+	else {
+		$width = HEADER_IMAGE_WIDTH;
+		$height = HEADER_IMAGE_HEIGHT;
+	}
+
+	echo '
+	<style>
+	.login h1 a {
+		background-image: url('. get_header_image() .') !important;
+		background-size: '. $width .'px '. $height .'px !important;
+		width: '. $width .'px !important;
+		height: '. $height .'px !important;
+	}
+	</style>';
+}
