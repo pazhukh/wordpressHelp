@@ -13,6 +13,14 @@ add_filter('the_generator', '__return_empty_string'); // із фідів та UR
 
 ********************************************************************  
 
+//Відключим вивід помилки на сторінкці авторизації
+add_filter('login_errors', 'login_obscure_func');
+function login_obscure_func(){
+	return 'Помилка: ви ввели неправильний логін або пароль.';
+}
+
+********************************************************************  
+
 // Header menu
 register_nav_menus( array(
 	'menu');
