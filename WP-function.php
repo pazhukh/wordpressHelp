@@ -6,6 +6,12 @@ remove_action ('wp_head', 'wp_generator');
 show_admin_bar(false);
 
 ********************************************************************  
+//видалення версії WP
+//ТАкож видалити файл readme.html в корні сайта
+remove_action('wp_head', 'wp_generator'); // із заголовка
+add_filter('the_generator', '__return_empty_string'); // із фідів та URL
+
+********************************************************************  
 
 // Header menu
 register_nav_menus( array(
