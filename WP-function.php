@@ -458,3 +458,8 @@ function wp_login_logo_img_url() {
 	}
 	</style>';
 }
+
+***************************************************
+	
+//thumbnail ріжемо картинки
+add_image_size( 'blog-prev', 350, 320, true );
