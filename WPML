@@ -1,0 +1,2 @@
+icl_register_string('theme', 'Button', 'All news');
+<?php echo icl_t('theme', 'Button', 'All news'); ?>
