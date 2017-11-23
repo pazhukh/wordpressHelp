@@ -1,2 +1,6 @@
+//реєструємо і виводимо рядки
 icl_register_string('theme', 'Button', 'All news');
 <?php echo icl_t('theme', 'Button', 'All news'); ?>
+
+//повертає активну мову
+ICL_LANGUAGE_CODE
