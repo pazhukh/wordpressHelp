@@ -67,3 +67,37 @@ function my_mce4_options($init) {
 	return $init;
 }
 add_filter('tiny_mce_before_init', 'my_mce4_options');
+
+
+//add custom color to Wysiwyg Editor
+function my_mce4_options($init) {
+    $custom_colours = '
+    "252525", "Black",
+    "5e5e5e", "Light Black",
+    "eeeeee", "Light Grey",
+    "3d73a8", "Blue",
+    "a8b4bb", "Light Blue",
+    "FFFFFF", "White",
+    ';
+
+    // build colour grid default+custom colors
+    $init['textcolor_map'] = '['.$custom_colours.']';
+
+    // change the number of rows in the grid if the number of colors changes
+    // 8 swatches per row
+    $init['textcolor_rows'] = 1;
+
+    return $init;
+}
+add_filter('tiny_mce_before_init', 'my_mce4_options');
+
+*************************************************************************************************************************
+
+//add custom font sizes to Wysiwyg Editor
+if ( ! function_exists( 'wpex_mce_text_sizes' ) ) {
+    function wpex_mce_text_sizes( $initArray ){
+        $initArray['fontsize_formats'] = "9px 10px 12px 13px 14px 16px 18px 20px 22px 24px 28px 32px 36px";
+        return $initArray;
+    }
+}
+add_filter( 'tiny_mce_before_init', 'wpex_mce_text_sizes' );
