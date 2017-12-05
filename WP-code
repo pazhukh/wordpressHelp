@@ -1,5 +1,8 @@
 //перехід на пост в адмінку
+https://wp-kama.ru/function/get_edit_post_link
 edit_post_link();
+
+**********************************************************************************************************************
 
 //вставляємо в шаблон інший шаблон
 <?php get_template_part('template-parts/share', get_post_type() ); ?>
