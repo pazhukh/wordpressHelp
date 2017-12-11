@@ -102,3 +102,8 @@ if( $categories ){
 //get parrent term name of post
 $term_list = wp_get_post_terms(get_the_ID(), 'country', array("parent" => 0));
 echo $term_list[0]->name;
+
+*********************************************************************************
+
+//виводимо список всіх темпів поста (в циклі пишемо)
+wp_get_post_terms()
