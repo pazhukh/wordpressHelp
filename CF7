@@ -20,6 +20,7 @@ add_filter('wpcf7_form_elements', function($content) {
 //clear form after submit
 $('.form-wrapper').on('wpcf7mailsent', function(){
     $(this).find('.field input').attr('value', '');
+    $(this).find('input[type=submit]').prop('disabled','disabled');
 })
 
 *****************************************************************************************************
