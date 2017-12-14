@@ -25,6 +25,12 @@ $('.form-wrapper').on('wpcf7mailsent', function(){
 
 *****************************************************************************************************
 
+b.ajax-loader.is-active + input{
+	pointer-events:none!important;
+}
+
+*****************************************************************************************************
+
 //різне значення select option
 https://contactform7.com/selectable-recipient-with-pipes/
 
