@@ -17,6 +17,12 @@ add_filter('wpcf7_form_elements', function($content) {
 });
 
 *****************************************************************************************************
+//clear form after submit
+$('.form-wrapper').on('wpcf7mailsent', function(){
+    $(this).find('.field input').attr('value', '');
+})
+
+*****************************************************************************************************
 
 //різне значення select option
 https://contactform7.com/selectable-recipient-with-pipes/
