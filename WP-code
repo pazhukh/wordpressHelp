@@ -2,6 +2,10 @@
 https://wp-kama.ru/function/get_edit_post_link
 edit_post_link();
 
+<?php if( current_user_can( 'edit_posts' ) ): ?>
+	<a href="<?php echo get_edit_post_link($post_id); ?>" class="post-edit-link"></a>
+<?php endif; ?>
+
 **********************************************************************************************************************
 
 //вставляємо в шаблон інший шаблон
