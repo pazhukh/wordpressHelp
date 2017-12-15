@@ -1,3 +1,25 @@
+<?php 
+$args = array(
+					'taxonomy'     => 'product_cat',
+					'type'         => 'product',
+				);
+				$categories = get_categories( $args );
+				if( $categories ){
+					foreach( $categories as $cat ){
+
+						// получим ID картинки из метаполя термина
+						$image_id = get_term_meta( $cat->cat_ID, 'thumbnail_id', 1 );
+						// ссылка на полный размер картинки по ID вложения
+						$image_url = wp_get_attachment_image_url( $image_id, 'catalog' );	?>
+						
+									<img src="<?php echo $image_url; ?>" alt="<?php echo $cat->name; ?>">
+						<?php 
+					}
+				}
+			?>
+
+*************************************************************
+
 //в single.php взнаємо ID поста в циклі
 $post_id = get_the_ID();
 
