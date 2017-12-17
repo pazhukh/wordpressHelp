@@ -1,3 +1,8 @@
+//видалити custom field з BD
+DELETE FROM wp_postmeta WHERE wp_postmeta.meta_key = "custom_field_name" OR wp_postmeta.meta_key = "_custom_field_name"
+
+*********************************************************************
+
 // на сторінкці archive.php shop page додати до поля код
 pll_get_post(get_option('woocommerce_shop_page_id' ) )
 <?php echo get_field('main_collection_title', pll_get_post(get_option('woocommerce_shop_page_id'))); ?>
