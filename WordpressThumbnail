@@ -1,6 +1,8 @@
 // output thumbnail link(url)
 <?php the_post_thumbnail_url(); ?>
 
+the_post_thumbnail_url( $size = 'thumbnail' )
+
 // output thumbnail title 
 <?php $img_id = get_post_thumbnail_id(get_the_ID()); ?>
 <?php $title_text = get_the_title($img_id) ?>
