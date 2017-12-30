@@ -31,3 +31,7 @@
 						$wp_query = $tmp_query;
 						?>
               
+
+
+//ajax підгрузка постів
+https://misha.blog/wordpress/ajax-pagination.html
