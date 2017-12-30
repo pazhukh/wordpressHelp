@@ -95,6 +95,8 @@ if (have_posts()){
 <?php }
 } else {
 } ?>
+<?php wp_reset_query(); ?>
+
 
 //в цикл постів
 <?php the_title(); ?>
