@@ -111,7 +111,6 @@ the_post_thumbnail(array(1024, 512, true), array('class' => 'img-responsive')); 
 
 *********************************************************************************
 
-
 //register polylang menu widget
 function wpb_widgets_init() {
 	register_sidebar( array(
@@ -128,6 +127,12 @@ pll_register_string( 'Заголовок', 'Текст', 'theme', false );
 //вивід рядка в файлі
 <?php pll_e('Текст'); ?>
 
+*********************************************************************************
+
+//вставляємо інші файли в function.php
+require get_template_directory() . '/inc/ajax-posts.php';
+
+*********************************************************************************
 
 //дочірні категорії беруть шаблон батьківської.
 //актуально для категорій та single.php
