@@ -495,3 +495,21 @@ if ( ! empty( $search ) ) {
 return $search;
 }
 add_filter( 'posts_search', 'ni_search_by_title_only', 500, 2 );
+
+******************************************************************************************************
+	
+//додаємо title атрибут до картинок загружені через редактор
+// set the title attribute on images inserted via the editor
+function featured_image_titles($attr, $attachment = null){
+	$attr['title'] = get_post($attachment->ID)->post_title;
+	$attr['alt'] = get_post($attachment->ID)->post_title;
+	return $attr;
+}
+add_filter('wp_get_attachment_image_attributes', 'featured_image_titles', 10, 2);
+
+//remove srcset attribute from images
+add_filter( 'wp_calculate_image_srcset_meta', '__return_null' );
+	
+******************************************************************************************************
+	
+	
