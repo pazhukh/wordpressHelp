@@ -14,9 +14,9 @@ edit_post_link();
 **********************************************************************************************************************
 
 //New Query шаблон виводу пстів
-<?php $the_query1 = new WP_Query(array( 'category_name' => 'lang_schools',
+<?php $the_query = new WP_Query(array( 'category_name' => 'lang_schools',
 'posts_per_page'=> 3, 'orderby'=>'modified', 'post_type' => 'course' )); ?>
-			<?php while  ($the_query1->have_posts() ) : $the_query1->the_post(); ?>
+			<?php while  ($the_query->have_posts() ) : $the_query->the_post(); ?>
 				тіло циклу
 			<?php endwhile; ?>
 			<?php wp_reset_postdata();?>
