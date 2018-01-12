@@ -1,0 +1,123 @@
+//header
+
+<div class="search-form">
+    <input type="text" name="keyword" id="keyword" onkeyup="fetch()" placeholder="<?php echo icl_t('theme', 'Search', 'Search'); ?>"></input>
+    <div id="datafetch"></div>
+    <img src="<?php bloginfo('template_url'); ?>/img/ajax-loader.gif" alt="loader" class="search-loader">
+</div>
+
+
+
+
+
+
+
+//function.php
+
+//ajax search products
+// add the ajax fetch js
+add_action( 'wp_footer', 'ajax_fetch' );
+function ajax_fetch() {
+	?>
+	<script type="text/javascript">
+		var timer;
+		function fetch(){
+			clearTimeout(timer);
+			var ms = 400; 
+			var val = jQuery('#keyword').val();
+			timer = setTimeout(function() {
+				if (val.length>=3){
+
+					jQuery.ajax({
+						url: '<?php echo admin_url('admin-ajax.php'); ?>',
+						type: 'post',
+						data: { action: 'data_fetch', keyword: val },
+						beforeSend: function() {
+							jQuery('.search-loader').show();
+						},
+
+						success: function(data) {
+							/*data = data.toLowerCase();
+							currVal = (jQuery('#keyword').val()).toLowerCase();*/
+							// data = jQuery(data).not(':not(:contains(' + currVal + '))');
+							// data = jQuery(data).not(':contains(' + currVal + ')').remove();
+							// jQuery(data+':not(:contains(' + jQuery('#keyword').val() + '))').remove();
+							jQuery('#datafetch').html( data );
+							jQuery('.search-loader').hide();
+						}
+
+					});
+
+				} else if (val.length==0){
+					jQuery('#datafetch').html('');
+				}
+			}, ms);
+		}
+	</script>
+
+	<?php
+}
+// the ajax function
+add_action('wp_ajax_data_fetch' , 'data_fetch');
+add_action('wp_ajax_nopriv_data_fetch','data_fetch'); 
+function data_fetch(){
+
+	$the_query = new WP_Query( array( 'posts_per_page' => -1, 's' => esc_attr( $_POST['keyword'] ), 'post_type' => 'product', 'post_status'=> 'publish' ) );
+	if( $the_query->have_posts() ) :
+
+		while( $the_query->have_posts() ): $the_query->the_post(); 
+
+	$p_title = strtolower(get_the_title());
+	$p_search = strtolower($_POST['keyword']);
+
+	if( preg_match('/' . $p_search . '/',$p_title)): 
+		?>
+
+	<a href="<?php  echo esc_url( post_permalink() ) ?>" class="quick-link">
+		<img src="<?php the_post_thumbnail_url('thumbnail'); ?>" alt="">
+		<span><?php the_title(); ?></span>
+	</a>
+
+	<?php 		
+	endif; 
+
+	endwhile;
+
+	wp_reset_postdata();  
+
+	else: 
+		echo icl_t('theme', 'Not found', 'Not found');
+	endif;
+
+	die();
+}
+
+
+
+
+
+
+
+//шукаємо лише по заголовках
+/query only in title (for ajax search)
+function ni_search_by_title_only( $search, $wp_query ){
+	global $wpdb;
+	if ( empty( $search ) )
+    return $search; // skip processing - no search term in query
+$q = $wp_query->query_vars;
+$n = ! empty( $q['exact'] ) ? '' : '%';
+$search =
+$searchand = '';
+foreach ( (array) $q['search_terms'] as $term ) {
+	$term = esc_sql( like_escape( $term ) );
+	$search .= "{$searchand}($wpdb->posts.post_title LIKE '{$n}{$term}{$n}')";
+	$searchand = ' AND ';
+}
+if ( ! empty( $search ) ) {
+	$search = " AND ({$search}) ";
+	if ( ! is_user_logged_in() )
+		$search .= " AND ($wpdb->posts.post_password = '') ";
+}
+return $search;
+}
+add_filter( 'posts_search', 'ni_search_by_title_only', 500, 2 );
