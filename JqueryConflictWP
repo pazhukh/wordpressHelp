@@ -1,1 +1,0 @@
-var $= jQuery.noConflict(); // add this script to the start of our common.js, and dont need add Jquery
