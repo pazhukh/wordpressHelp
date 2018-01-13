@@ -1,0 +1,9 @@
+//js
+
+$('.csshare-item, .share-icon').on('click', function(e){
+		e.preventDefault();
+		e.stopPropagation();
+		var link = $(this).attr('href');
+		var shareType = $(this).attr('data-csshare-type');
+		window.open(link, shareType, 'toolbar=0,status=0,width=626,height=436');
+})
