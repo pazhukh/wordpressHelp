@@ -29,3 +29,26 @@ function share_this(){
     
     return $content;  
 }
+
+
+
+//другий варіант функції
+function get_sharePost(){
+	$title = get_the_title();
+	$permalink = get_permalink();
+
+	$facebook = 'https://www.facebook.com/sharer/sharer.php?u=' . $permalink;
+	$google = 'https://plus.google.com/share?url=' . $permalink;	
+
+	return '
+
+	<p class="soc-icons d-flex justify-content-center share">
+		<a href="' . $facebook .'" data-csshare-type="facebook"><i class="fa fa-facebook" aria-hidden="true"></i>
+		</a>
+		<a href="' . $google .'" data-csshare-type="google-pluse"><i class="fa fa-google-plus" aria-hidden="true"></i>
+		</a>
+	</p>
+
+	';
+
+}
