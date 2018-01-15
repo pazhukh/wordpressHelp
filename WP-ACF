@@ -1,3 +1,9 @@
+//реєструємо api для google map
+add_filter('acf/settings/google_api_key', function () {
+    return 'AIzaSyDxdIw2RxzT0dxXmeERy-rw9rKbgEuDDg8';
+});
+
+
 //видалити custom field з BD
 DELETE FROM wp_postmeta WHERE wp_postmeta.meta_key = "custom_field_name" OR wp_postmeta.meta_key = "_custom_field_name"
 
