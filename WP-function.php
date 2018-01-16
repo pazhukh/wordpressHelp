@@ -511,5 +511,12 @@ add_filter('wp_get_attachment_image_attributes', 'featured_image_titles', 10, 2)
 add_filter( 'wp_calculate_image_srcset_meta', '__return_null' );
 	
 ******************************************************************************************************
-	
+
+// міняєм кількість потів на сторінці archive-custom.php
+function set_posts_per_page_for_towns_cpt( $query ) {
+ if ( !is_admin() && $query->is_main_query() && is_post_type_archive( 'custom' ) ) {
+   $query->set( 'posts_per_page', '10' );
+ }
+}
+add_action( 'pre_get_posts', 'set_posts_per_page_for_towns_cpt' );
 	
