@@ -1,4 +1,7 @@
 https://coolestguidesontheplanet.com/updating-wordpress-mysql-database-after-moving-to-a-new-url/
+http://www.mysqltutorial.org/mysql-variables/
+
+
 
 UPDATE wp_options SET option_value = replace(option_value, 'http://www.oldurl', 'http://www.newurl') WHERE option_name = 'home' OR option_name = 'siteurl';
 UPDATE wp_posts SET guid = replace(guid, 'http://www.oldurl','http://www.newurl');
