@@ -91,6 +91,7 @@ jQuery(function ($) {}
 
 //thumbnails in posts
 add_theme_support('post-thumbnails'); 
+add_theme_support( 'post-thumbnails', array( 'post' ) );
 //logo через адмінку
 add_theme_support( 'custom-header' ); //додає картинку та color
 //додаємо можливіість WP самому генерувати <title></title> (тег вже не потрібно давати в хедер)
