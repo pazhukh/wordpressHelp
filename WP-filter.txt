@@ -1,3 +1,7 @@
+//динамічні select для CF7
+http://bdwm.be/how-to-create-dynamically-populated-cascading-dropdown-lists-for-contact-form-7/
+
+
 //шаблонний файл
 <form action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST" id="filter">
 		<select name="category" id="category">
