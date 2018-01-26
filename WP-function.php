@@ -1,4 +1,4 @@
-// delete trash
+// clear head
 if ( ! function_exists('cleanup_head') ) {
   function cleanup_head() {
     remove_action('wp_head', 'wp_generator');
@@ -16,25 +16,42 @@ if ( ! function_exists('cleanup_head') ) {
 }
 add_action('init', 'cleanup_head');
 
+// Remove Query Strings From Static Resources
+if ( ! function_exists('progenitor_remove_script_version') ) {
+  function progenitor_remove_script_version( $src ) {
+    $parts = explode( '?', $src );
+    return $parts[0];
+  }
+}
+add_filter( 'script_loader_src', 'progenitor_remove_script_version', 15, 1 );
+add_filter( 'style_loader_src', 'progenitor_remove_script_version', 15, 1 );
+
+
+//remove WP version from RSS
+if ( ! function_exists('remove_wp_version') ) {
+  function remove_wp_version() {
+	return '';
+  }
+}
+add_filter( 'the_generator', 'remove_wp_version' );
+
+
+
+// Show less info to users on failed login for security.
+if ( ! function_exists('show_less_login_info') ) {
+  function show_less_login_info() {
+      return "<strong>ERROR</strong>: Stop guessing!";
+  }
+}
+add_filter( 'login_errors', 'show_less_login_info' );
+
+
+
 
 
 show_admin_bar(false);
 
 ********************************************************************  
-//видалення версії WP
-//ТАкож видалити файл readme.html в корні сайта
-remove_action('wp_head', 'wp_generator'); // із заголовка
-add_filter('the_generator', '__return_empty_string'); // із фідів та URL
-
-********************************************************************  
-
-//Відключим вивід помилки на сторінкці авторизації
-add_filter('login_errors', 'login_obscure_func');
-function login_obscure_func(){
-	return 'Помилка: ви ввели неправильний логін або пароль.';
-}
-
-******************************************************************** 
 
 //Відключаєм можливітсь редагувати файли в адмінці для тем, плагінів
 define('DISALLOW_FILE_EDIT', true);
