@@ -32,6 +32,7 @@ register_nav_menus( array(
 		'submain' => esc_html__( 'Submain', 'Theme' ),
 		'footerMenu' => esc_html__( 'FooterMenu', 'Theme' ),
    ) );
+<?php wp_nav_menu( array( 'theme_location' => 'footerMenu', 'menu_class' => 'footerMenu', 'container' => 'ul' ) ); ?>
 
 ********************************************************************  
   
