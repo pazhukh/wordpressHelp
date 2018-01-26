@@ -28,7 +28,10 @@ define('DISALLOW_FILE_EDIT', true);
 
 // Header menu
 register_nav_menus( array(
-	'menu');
+		'main' => esc_html__( 'Main', 'Theme' ),
+		'submain' => esc_html__( 'Submain', 'Theme' ),
+		'footerMenu' => esc_html__( 'FooterMenu', 'Theme' ),
+   ) );
 
 ********************************************************************  
   
