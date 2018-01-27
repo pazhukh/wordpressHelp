@@ -112,6 +112,12 @@ if (have_posts()){
 <?php the_excerpt()?>
 <?php the_time(); ?> //https://wp-kama.ru/id_7433/formaty-daty-i-vremeni-v-wordpress.html
 
+<?php 
+$author = wp_get_current_user();
+$author_full_name = $author->user_firstname . ' ' . $author->user_lastname;
+$author_url = $author->user_url;
+?>
+
 **********************************************************************************************************************
 
 //ріжемо тексти
