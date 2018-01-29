@@ -1,0 +1,81 @@
+//в шаблон taxonomy-taxonomyName.php
+<?php 
+        //post type
+        $post_type = 'category, custom-category';
+        //taxonomy name
+				$texonomy = 'taxonomyName';
+        //term ID
+				$term = get_queried_object()->term_id;
+        
+
+				if(term_has_children($term, $texonomy) ){
+
+
+					//if category have subcategories - show subcategories
+					$args = array(
+						'hierarchical' => 1,
+						'hide_empty' => 1,
+						'parent' => $term,
+						'taxonomy' => $texonomy,
+					);
+					$sub_terms = get_terms($args);
+
+					foreach ($sub_terms as $sub_term) {
+            
+            //term image ACF
+						$link = get_term_link( $sub_term->slug, $sub_term->taxonomy );
+						$image = get_field('preview_img', $sub_term->taxonomy . '_' . $sub_term->term_id);
+
+						echo '<article class="prod-cat-item">
+						<a href="'. $link .'">
+						<img src="' . $image['sizes']['thumbnail'] .'" alt="' . get_field('preview_img', $sub_term->taxonomy . '_' . $sub_term->term_id)['title'] .'">
+						<h3 class="name">'. $sub_term->name .'</h3>
+						<mark class="count">('. $sub_term->count .')</mark>
+						</a>
+						</article>';
+					}
+
+				} else { 
+
+					//if category do not have subcategories - show posts
+					$args = array(
+						'post_type' => $post_type,
+						'tax_query' => array(
+							'relation' => 'AND',
+							array(
+								'taxonomy' => $texonomy,
+								'terms' => $term,
+								'field' => 'term_id',
+								'operator' => 'IN',
+							)
+						)
+					);
+					query_posts( $args );
+
+					if (have_posts()){
+						while (have_posts()) { the_post(); ?> 
+						<article class="prod-cat-item">
+							<a href="<?php the_permalink(); ?>">
+								<img src="<?php the_post_thumbnail_url( 'thumbnail' ); ?>" alt="">
+								<h3 class="name"><?php the_title(); ?></h3>
+							</a>
+						</article>
+						<?php }
+					}
+				} 
+				?>
+        
+ ******************************************************************************************************
+ 
+//function.php
+
+//Checking for a subterms
+function term_has_children( $term, $taxonomy ){
+	$children = get_terms( array( 
+		'child_of'      => $term,
+		'taxonomy'      => $taxonomy,
+		'hide_empty'    => false,
+		'fields'        => 'ids',
+	) );
+	return ( $children );
+}
