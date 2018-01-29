@@ -20,6 +20,11 @@ $args = array(
 
 *************************************************************
 
+//в category.php виводимо discription терміна
+category_description();
+
+*************************************************************
+
 //в single.php взнаємо ID поста в циклі
 $post_id = get_the_ID();
 
@@ -39,7 +44,7 @@ $catName = $cat[0]->slug;
 
 //в category.php якщо дана категорія має дочірні категорії\
 //руєструємо в functions.php
-function category_has_children( $term_id = 0, $taxonomy = 'category' ){
+function category_has_children( $term_id = 'id терміну', $taxonomy = 'category' ){
 	$children = get_categories( array( 
 		'child_of'      => $term_id,
 		'taxonomy'      => $taxonomy,
