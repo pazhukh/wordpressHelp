@@ -4,6 +4,33 @@
 (створюємо шаблон для категорій texonomy-customTaxonomyName.php)
 
 //в шаблон taxonomy-customTaxonomyName.php
+
+//посилання на категорію
+$link = get_term_link( $sub_term );
+
+//картинка категорії
+$image = get_field('preview_img', $sub_term->taxonomy . '_' . $sub_term->term_id);  (ACF)
+echo $image['sizes']['thumbnail']
+
+//назва категорії
+$sub_term->name
+
+//опис категорії
+$sub_term->description
+
+//кількість постів
+$sub_term->count
+
+
+//slug категорії
+$sub_term->slug
+
+//ID категорії
+$sub_term->term_id
+ 
+
+*********************************************************************************************
+
 <?php 
         //post type
         $post_type = 'category, custom-category';
@@ -28,7 +55,7 @@
 					foreach ($sub_terms as $sub_term) {
             
             //term image ACF
-						$link = get_term_link( $sub_term->slug, $sub_term->taxonomy );
+						$link = get_term_link( $sub_term );
 						$image = get_field('preview_img', $sub_term->taxonomy . '_' . $sub_term->term_id);
 
 						echo '<article class="prod-cat-item">
