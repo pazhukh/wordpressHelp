@@ -672,3 +672,31 @@ function rename_posts_labels( $labels ){
 
 	return (object) array_merge( (array) $labels, $new );
 }
+
+********************************************************************************************************
+	
+## Изменяет логотип, его ссылку и title атрибут на странице входа
+if(1){
+	// Изменяем картинку (логотип)
+	// укажите правильную ссылку на картинку.
+	add_action( 'login_head', 'wp_login_logo_img_url' );
+	function wp_login_logo_img_url() {
+		echo '
+		<style>
+			.login h1 a{ background-image: url( '. get_template_directory_uri() .'/images/logo.png ) !important; }
+		</style>';
+	}
+
+	// Изменяем ссылку с логотипа
+	add_filter( 'login_headerurl', 'wp_login_logo_link_url' );
+	function wp_login_logo_link_url( $url ){
+		return home_url();
+	}
+
+	// Изменяем атрибут title у ссылки логотипа
+	add_filter( 'login_headertitle', 'wp_login_logo_title_attr' );
+	function wp_login_logo_title_attr( $title ) {
+		$title = get_bloginfo( 'name' );
+		return $title;
+	}   
+}
