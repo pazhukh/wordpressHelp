@@ -713,3 +713,12 @@ function performance(){
 	echo $stat; // видно
 	//echo "<!-- $stat -->"; // скрыто
 }
+	
+*****************************************************************************************************
+
+//не показувати оновлення про нові версії WP	
+if( ! current_user_can( 'edit_users' ) ){
+	add_filter( 'auto_update_core', '__return_false' );   // обновление ядра
+
+	add_filter( 'pre_site_transient_update_core', '__return_null' );
+}
