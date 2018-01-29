@@ -36,7 +36,6 @@ if ( ! function_exists('remove_wp_version') ) {
 add_filter( 'the_generator', 'remove_wp_version' );
 
 
-
 // Show less info to users on failed login for security.
 if ( ! function_exists('show_less_login_info') ) {
   function show_less_login_info() {
@@ -47,11 +46,20 @@ add_filter( 'login_errors', 'show_less_login_info' );
 
 
 
-
-
 show_admin_bar(false);
 
 ********************************************************************  
+
+// відміняємо показ вибраного терміну наверху в списку термінів
+add_filter( 'wp_terms_checklist_args', 'set_checked_ontop_default', 10 );
+function set_checked_ontop_default( $args ) {
+	if( ! isset($args['checked_ontop']) )
+		$args['checked_ontop'] = false;
+
+	return $args;
+}
+
+******************************************************************** 
 
 //Відключаєм можливітсь редагувати файли в адмінці для тем, плагінів
 define('DISALLOW_FILE_EDIT', true);
