@@ -700,3 +700,16 @@ if(1){
 		return $title;
 	}   
 }
+	
+	
+***************************************************************************************************
+
+//час завантаження сторінки, кількість запитів в БД
+add_filter('admin_footer_text', 'performance'); // в подвале админки
+add_filter('wp_footer', 'performance'); // в подвале сайта
+function performance(){
+	$stat = sprintf('SQL: %d за %.3f sec. %.2f MB', get_num_queries(), timer_stop(0, 3), (memory_get_peak_usage() / 1024 / 1024) );
+
+	echo $stat; // видно
+	//echo "<!-- $stat -->"; // скрыто
+}
