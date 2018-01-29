@@ -722,3 +722,7 @@ if( ! current_user_can( 'edit_users' ) ){
 
 	add_filter( 'pre_site_transient_update_core', '__return_null' );
 }
+	
+//не показувати оновлення про нові версії плагінів
+remove_action( 'load-update-core.php', 'wp_update_plugins' );
+add_filter( 'pre_site_transient_update_plugins', create_function( '$a', "return null;" ) );
