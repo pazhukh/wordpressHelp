@@ -113,9 +113,8 @@ if (have_posts()){
 <?php the_time(); ?> //https://wp-kama.ru/id_7433/formaty-daty-i-vremeni-v-wordpress.html
 
 <?php 
-$author = wp_get_current_user();
-$author_full_name = $author->user_firstname . ' ' . $author->user_lastname;
-$author_url = $author->user_url;
+$author_name = get_the_author_meta('first_name');
+$author_url = get_the_author_meta('user_url');
 ?>
 
 **********************************************************************************************************************
@@ -337,3 +336,10 @@ wp_reset_query();
 http://wpsnipp.com/index.php/cache/track-post-views-without-a-plugin-using-post-meta/
 
 **********************************************************************************************************************
+
+//user info 
+<?php 
+$author = wp_get_current_user();
+$author_full_name = $author->user_firstname . ' ' . $author->user_lastname;
+$author_url = $author->user_url;
+?>
