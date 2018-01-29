@@ -1,4 +1,9 @@
-//в шаблон taxonomy-taxonomyName.php
+Провіряємо чи терм має дочірні терми.
+Якщо має, тоді виводимо його дочірні терми.
+Якщо НЕМАЄ, тоді виводимо всі пости даного терміна.
+(створюємо шаблон для категорій texonomy-customTaxonomyName.php)
+
+//в шаблон taxonomy-customTaxonomyName.php
 <?php 
         //post type
         $post_type = 'category, custom-category';
