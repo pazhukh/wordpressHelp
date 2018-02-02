@@ -1,5 +1,13 @@
 [response]
 
+****************************************************************************************************************************************
+
+//не підгружати CF7 для сторінок, де його немає
+https://contactform7.com/loading-javascript-and-stylesheet-only-when-it-is-necessary/
+add_filter( 'wpcf7_load_js', '__return_false' );
+add_filter( 'wpcf7_load_css', '__return_false' );
+
+****************************************************************************************************************************************
 
 https://wordpress.org/plugins/contact-form-7/advanced/
 //можливості плагіна
