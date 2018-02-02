@@ -228,6 +228,14 @@ add_action( 'widgets_init', 'polylangWidg' );
 //Виводимо поле polylang раніше зареєстроване в function.php
 <?php echo pll_e('Відгуки наших клієнтів'); ?>
 
+
+$cur_lang = pll_current_language(); 
+if($cur_lang = 'uk'){
+echo 'uk';
+} else {
+echo 'eng';
+}
+
 **********************************************************************************************************************
 
 //виводимо одну статтю
