@@ -27,3 +27,9 @@ Limit Login Attempts - лімітує кількість спроб входу �
 Theme to Browser (T2B) Control - міняти теми для різних браузерів(IE, Firefox, Opera...)
 Any Mobile Theme Switcher - міняти теми для різних мобільних пристроїв (Android, Windows Mobile, Opera Mini...)
 Optimize Database after Deleting Revisions, WP-Optimize - оптимізуємо базу даних
+
+
+
+https://github.com/saxap/wp_frontend_users_staff/
+https://wp-admin.com.ua/razrabotka-lichnogo-kabineta-wordpress/
+рєстрація і добавлення користувача через фронтенд
