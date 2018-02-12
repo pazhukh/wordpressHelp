@@ -726,3 +726,18 @@ if( ! current_user_can( 'edit_users' ) ){
 //не показувати оновлення про нові версії плагінів
 remove_action( 'load-update-core.php', 'wp_update_plugins' );
 add_filter( 'pre_site_transient_update_plugins', create_function( '$a', "return null;" ) );
+
+*****************************************************************************************************
+
+//додаємо додаткові поля до користувача user profile
+	
+// echo $current_user->skype;
+function add_social_contactmethod( $contactmethods ) {
+    // Add new ones
+	$contactmethods['skype'] = 'Skype';
+	$contactmethods['twitter'] = 'Twitter';
+	$contactmethods['facebook'] = 'Facebook';
+	$contactmethods['linkedin'] = 'Linkedin';
+	return $contactmethods;
+}
+add_filter('user_contactmethods','add_social_contactmethod',10,1);
