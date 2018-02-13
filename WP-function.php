@@ -741,3 +741,54 @@ function add_social_contactmethod( $contactmethods ) {
 	return $contactmethods;
 }
 add_filter('user_contactmethods','add_social_contactmethod',10,1);
+
+*****************************************************************************************************	
+
+//add sortable column with acf into users (WP Dashboard)
+//add additional columns to the users.php admin page
+//acf field peyed_on_the_wallet(radiobutton)
+function modify_user_columns($column) {
+    $column = array(
+        "cb" => "",
+        "username" => "Username",
+        "payed" => "Payed",//the new column
+        "email" => "E-mail",
+        "role" => "Role"
+    );
+    return $column;
+}
+add_filter('manage_users_columns','modify_user_columns');
+ 
+//add content to your new custom column
+function modify_user_column_content($val,$column_name,$user_id) {
+    $user = get_userdata($user_id);
+    switch ($column_name) {
+        case 'payed':
+            return $user->peyed_on_the_wallet;
+            break;
+        //I have additional custom columns, hence the switch. But am only showing one here
+        default:
+    }
+    return $return;
+}
+add_filter('manage_users_custom_column','modify_user_column_content',10,3);
+ 
+//make the new column sortable
+function user_sortable_columns( $columns ) {
+    $columns['payed'] = 'payed';
+    return $columns;
+}
+add_filter( 'manage_users_sortable_columns', 'user_sortable_columns' );
+ 
+//set instructions on how to sort the new column
+if(is_admin()) {//prolly not necessary, but I do want to be sure this only runs within the admin
+    add_action('pre_user_query', 'my_user_query');
+}
+function my_user_query($userquery){ 
+    if('payed'==$userquery->query_vars['orderby']) {//check if payed is the column being sorted
+        global $wpdb;
+        $userquery->query_from .= " LEFT OUTER JOIN $wpdb->usermeta AS alias ON ($wpdb->users.ID = alias.user_id) ";//note use of alias
+        $userquery->query_where .= " AND alias.meta_key = 'peyed_on_the_wallet' ";//which meta are we sorting with?
+        $userquery->query_orderby = " ORDER BY alias.meta_value ".($userquery->query_vars["order"] == "ASC" ? "asc " : "desc ");//set sort order
+    }
+}
