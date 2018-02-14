@@ -792,3 +792,12 @@ function my_user_query($userquery){
         $userquery->query_orderby = " ORDER BY alias.meta_value ".($userquery->query_vars["order"] == "ASC" ? "asc " : "desc ");//set sort order
     }
 }
+	
+************************************************************************************************************	
+	
+
+//Redirect non-admins to the homepage after logging into the site.
+function acme_login_redirect( $redirect_to, $request, $user  ) {
+	return ( is_array( $user->roles ) && in_array( 'administrator', $user->roles ) ) ? admin_url() : site_url();
+}
+add_filter( 'login_redirect', 'acme_login_redirect', 10, 3 );
