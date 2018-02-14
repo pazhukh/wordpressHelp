@@ -20,6 +20,7 @@ function my_action_javascript() {
 
 
 add_action('wp_ajax_data_fetch' , 'my_action_callback'); 
+add_action( 'wp_ajax_nopriv_data_fetch', 'my_action_callback' );
 function my_action_callback() { 
     echo 'Working';
     wp_die(); // выход нужен для того, чтобы в ответе не было ничего лишнего, только то что возвращает функция
