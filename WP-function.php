@@ -801,3 +801,12 @@ function acme_login_redirect( $redirect_to, $request, $user  ) {
 	return ( is_array( $user->roles ) && in_array( 'administrator', $user->roles ) ) ? admin_url() : site_url();
 }
 add_filter( 'login_redirect', 'acme_login_redirect', 10, 3 );
+
+// Block Access to /wp-admin for non admins.
+function custom_blockusers_init() {
+  if ( is_user_logged_in() && is_admin() && !current_user_can( 'administrator' ) ) {
+    wp_redirect( home_url() );
+    exit;
+  }
+}
+add_action( 'init', 'custom_blockusers_init' ); // Hook into 'init'
