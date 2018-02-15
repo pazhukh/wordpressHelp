@@ -1,0 +1,11 @@
+$current_user = wp_get_current_user();	
+
+echo $current_user->user_login;
+echo $current_user->user_email;
+echo $current_user->user_firstname;
+echo $current_user->user_lastname;
+echo $current_user->display_name;
+echo $current_user->ID;
+
+
+Register date <?php echo date( "d M Y", strtotime( $current_user->user_registered ) ); ?>
