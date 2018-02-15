@@ -9,3 +9,12 @@ echo $current_user->ID;
 
 
 Register date <?php echo date( "d M Y", strtotime( $current_user->user_registered ) ); ?>
+
+
+РЕЄСТРАЦІЯ НОВОГО ЮЗЕРА
+//Лише за email i login
+//на пошту прийде лист з переходом на сайт з відображенням паролю
+register_new_user($user_login, $user_email);
+
+//вставляє в базу даних нового користувача/або оновляє користувача якщо вказати ID
+wp_insert_user();
