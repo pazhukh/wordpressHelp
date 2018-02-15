@@ -18,3 +18,67 @@ register_new_user($user_login, $user_email);
 
 //вставляє в базу даних нового користувача/або оновляє користувача якщо вказати ID
 wp_insert_user();
+
+
+***********************************************************
+
+додаємо кастомну колонку яка буде сортуватися в dashboard users.php
+//add sortable column with acf into users (WP Dashboard)
+//add additional columns to the users.php admin page
+//acf field peyed_on_the_wallet(radiobutton)
+function add_payed_column($columns) {
+	$columns['payed'] = 'Payed';
+	return $columns;
+}
+add_filter('manage_users_columns','add_payed_column');
+
+//add content to your new custom column
+function add_data_to_payed_column($val,$column_name,$user_id) {
+	$user = get_userdata($user_id);
+	switch ($column_name) {
+		case 'payed':
+		return $user->peyed_on_the_wallet;
+		break;
+		default:
+	}
+	return $return;
+}
+add_filter('manage_users_custom_column','add_data_to_payed_column',10,3);
+
+//make the new column sortable
+function user_sortable_columns( $columns ) {
+	$columns['payed'] = 'payed';
+	return $columns;
+}
+add_filter( 'manage_users_sortable_columns', 'user_sortable_columns' );
+
+********************************************************************************************************************
+
+додаємо колонку з датою реєстрації користувача, яка буде сортуватися в dashboard users.php
+//Create a registration column. 
+add_filter( 'manage_users_columns', 'add_registered_date_column' );
+
+function add_registered_date_column( $columns ) {
+	$columns['registration_date'] = 'Registration date'; // add new
+	return $columns;
+}
+
+//add data to our new column with the registration dates of the users
+add_filter( 'manage_users_custom_column', 'add_data_to_registered_date_column', 10, 3 );
+
+function add_data_to_registered_date_column( $row_output, $column_id_attr, $user ) {
+	$date_format = 'j/m/Y';
+	switch ( $column_id_attr ) {
+		case 'registration_date' :
+			return date( $date_format, strtotime( get_the_author_meta( 'registered', $user ) ) );
+			break;
+		default:
+	}
+	return $row_output;
+}
+
+// make our "Registration date" column sortable
+add_filter( 'manage_users_sortable_columns', 'rudr_make_registered_column_sortable' );
+function rudr_make_registered_column_sortable( $columns ) {
+	return wp_parse_args( array( 'registration_date' => 'registered' ), $columns );
+}
