@@ -82,3 +82,27 @@ add_filter( 'manage_users_sortable_columns', 'rudr_make_registered_column_sortab
 function rudr_make_registered_column_sortable( $columns ) {
 	return wp_parse_args( array( 'registration_date' => 'registered' ), $columns );
 }
+
+
+
+***************************************************
+
+//redirect after loggin to HP
+add_filter('login_redirect', 'admin_default_page');
+function admin_default_page($user) {
+	if($user->roles != 'administrator'){
+		return get_home_url();
+	}
+}
+
+***************************************************
+
+//redirects all userc except administrators from wp-admin to HP, but keep ajax working
+add_action('admin_init', 'admin_redirects');
+function my_admin_init(){
+    if( !defined('DOING_AJAX') && !current_user_can('administrator') ){
+        wp_redirect( home_url() );
+        exit();
+    }
+}
+add_action('admin_init','my_admin_init');
