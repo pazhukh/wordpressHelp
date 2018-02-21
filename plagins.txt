@@ -6,7 +6,6 @@ Smooth Scroll Up - стрілка вверх
 Responsive Lightbox by dFactory, Easy SwipeBox - перегляд фоток на сайті, можна слайдерувати на телефоні
 WonderPlagin Lightbox - лайтбокс відео і ін.
 foogalery - створюєш кльові галереї, а перглядаєш в стандартному плагіні або Easy SwipeBox
-Smush Image Compression and Optimization - оптимізує фотографії
 TinyMCE Advanced - розширений текстовий редактор
 CMS Tree Page View - в dashboard показує всі сторінки
 Polylang - багатомовний плагін
@@ -26,10 +25,18 @@ WordPress Classifieds Plugin - тіпа OLX
 Limit Login Attempts - лімітує кількість спроб входу в WP admin
 Theme to Browser (T2B) Control - міняти теми для різних браузерів(IE, Firefox, Opera...)
 Any Mobile Theme Switcher - міняти теми для різних мобільних пристроїв (Android, Windows Mobile, Opera Mini...)
-Optimize Database after Deleting Revisions, WP-Optimize - оптимізуємо базу даних
+
 
 
 
 https://github.com/saxap/wp_frontend_users_staff/
 https://wp-admin.com.ua/razrabotka-lichnogo-kabineta-wordpress/
 рєстрація і добавлення користувача через фронтенд
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-
+оптимізація
+*-*-*-*-*-*-*-*-*-*-*-*-
+Smush Image Compression and Optimization - оптимізує фотографії
+Clearfy — плагин для оптимизации WordPress
+Optimize Database after Deleting Revisions, WP-Optimize - оптимізуємо базу даних
