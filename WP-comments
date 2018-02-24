@@ -1,3 +1,11 @@
+****************************************************************************************
+вивід форми для коментаря
+****************************************************************************************
+
+//створюємо нові поля в формі коментаря
+https://wp-kama.ru/id_8342/kak-dobavit-proizvolnye-polya-v-formu-kommentariev-wordpress.html#sozdanie-plagina-dlya-rasshireniya-formy-kommentariev
+
+
 //видаляємо поле url (site) з форми коментаря
 add_filter('comment_form_default_fields', 'remove_url_from_comments');
 function remove_url_from_comments ($fields){
@@ -33,3 +41,37 @@ function wpse250243_comment_form_defaults( $defaults ) {
     return $defaults;
 }
 add_filter( 'comment_form_defaults', 'wpse250243_comment_form_defaults', 10, 1 );
+
+
+****************************************************************************************
+вивід коментарів на сторінці
+****************************************************************************************
+//виводимо коментарі
+https://wp-kama.ru/function/get_comments#post_id-chislo
+
+<?php 
+		$args = array(
+			'post_id' => get_the_ID(),
+			);
+		$comments = get_comments( $args );
+		foreach( $comments as $comment ){ ?>
+		
+		<article class="block post-comment">
+			<div class="author-photo-wr">
+				<?php echo get_avatar( $comment, 65 ); ?>
+				<!-- <img src="assets/img/demo/stock_34_80x80.jpg" alt=""> -->
+			</div>
+			<div class="author-content">
+				<header class="comment-header">
+					<h3 class="author-name"><?php echo $comment->comment_author; ?></h3>
+					<p class="publish"><?php echo get_comment_date('F d, Y'); ?></p>
+					<a href="#" class="reply">Reply</a>
+				</header>
+				<div class="block-content">
+					<p><?php echo $comment->comment_content; ?></p>
+				</div>
+			</div>
+		</article>
+		<?php }
+
+		?>
