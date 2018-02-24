@@ -1,46 +1,172 @@
 ****************************************************************************************
 вивід форми для коментаря
 ****************************************************************************************
-
 //створюємо нові поля в формі коментаря
 https://wp-kama.ru/id_8342/kak-dobavit-proizvolnye-polya-v-formu-kommentariev-wordpress.html#sozdanie-plagina-dlya-rasshireniya-formy-kommentariev
+//щоб створити відредагувати вивід коментарів і змінити форму коментрів, треба:
 
+1) в шаблон single.php вставити код <?php comments_template(); ?>
+2) мати створений файл commets.php і внього записати наступне
 
-//видаляємо поле url (site) з форми коментаря
-add_filter('comment_form_default_fields', 'remove_url_from_comments');
-function remove_url_from_comments ($fields){
-    if(isset($fields['url']))
-       unset($fields['url']);
-       return $fields;
+<div id="comments" class="comments-area">
+
+	<?php
+	if ( have_comments() ) : ?>
+	
+
+	<ol class="comment-list">
+		<?php 
+		//call castom function mytheme_comment to show all comments
+		wp_list_comments('type=comment&callback=mytheme_comment'); 
+		?>
+	</ol>
+
+	<?php 
+
+	//comments pagination
+	the_comments_pagination();
+
+	endif;
+
+	// comment form
+	comment_form();	
+	?>
+
+</div>
+
+3) додати в functions.php функції і хуки, які будуть змінювати нашу форму і ввивід коментарів
+
+// Add or edit the notes before the comments form
+add_filter( 'comment_form_defaults', 'sp_add_comment_form_before' );
+function sp_add_comment_form_before( $defaults ) {
+	$defaults['comment_notes_before'] = '<p class="title">Leave a replay</p>';
+	return $defaults;
 }
 
-//змінюємо верску полів в формі і створюємо кастомний textarea, a default textarea видаляємо в нижчій функції(див нище)
+//change comment form what called by comment_form();
 add_filter('comment_form_default_fields', 'extend_comment_custom_default_fields');
 function extend_comment_custom_default_fields($fields) {
 
-	$commenter = wp_get_current_commenter();
-	$req = get_option( 'require_name_email' );
-	$aria_req = ( $req ? " aria-required='true'" : '' );
+	//remove url field from comment form
+	if(isset($fields['url'])){
+		unset($fields['url']);
+	}
 
-	$fields[ 'author' ] = '<input id="author" name="author" type="text" value="'. esc_attr( $commenter['comment_author'] ) .
-	'" size="30" tabindex="1"' . $aria_req . ' placeholder="Author"/>';
+	//change author field
+	$fields[ 'author' ] = '<input id="author" name="author" type="text" placeholder="Author"/>';
 
-	$fields[ 'email' ] = '<input id="email" name="email" type="text" value="'. esc_attr( $commenter['comment_author_email'] ) .
-	'" size="30"  tabindex="2"' . $aria_req . ' placeholder="email"/>';
+	//change email field
+	$fields[ 'email' ] = '<input id="email" name="email" type="email" placeholder="Email"/>';
 
+	//change comment field
 	$fields[ 'comment_field' ] = '<textarea id="comment" name="comment" type="text" placeholder="Message" ></textarea>';
+
+	//add custom field raiting
+	$fields[ 'raiting' ] = '<input type="radio" name="rating" id="rating" value="1"/>1 <br>
+	<input type="radio" name="rating" id="rating" value="2"/>2 <br>
+	<input type="radio" name="rating" id="rating" value="3"/>3 <br>
+	<input type="radio" name="rating" id="rating" value="4"/>4 <br>
+	<input type="radio" name="rating" id="rating" value="5"/>5 <br>';
+
 	return $fields;
 }
 
-//видаляє поле коментаря (textarea), але перед тим додаємо кастомне поле (див вище)
-function wpse250243_comment_form_defaults( $defaults ) {
-    if ( isset( $defaults[ 'comment_field' ] ) ) {
-        $defaults[ 'comment_field' ] = '';
-    }
 
-    return $defaults;
+//add custom fields to form
+function add_fields_to_comment_form( $defaults ) {
+	if ( isset( $defaults[ 'comment_field' ] ) ) {
+		$defaults[ 'comment_field' ] = '';
+	}
+	if ( isset( $defaults[ 'rating' ] ) ) {
+		$defaults[ 'rating' ] = '';
+	}
+
+	return $defaults;
 }
-add_filter( 'comment_form_defaults', 'wpse250243_comment_form_defaults', 10, 1 );
+add_filter( 'comment_form_defaults', 'add_fields_to_comment_form', 10, 1 );
+
+
+
+//save custom field raiting in DB
+add_action( 'comment_post', 'save_extend_comment_meta_data' );
+function save_extend_comment_meta_data( $comment_id ){
+
+	if( !empty( $_POST['rating'] ) ){
+		$rating = intval($_POST['rating']);
+		add_comment_meta( $comment_id, 'rating', $rating );
+	}
+}
+
+//show raiting value in Dushboard
+add_filter( 'comment_text', 'modify_extend_comment');
+function modify_extend_comment( $text ){
+
+	if( $commenttitle = get_comment_meta( get_comment_ID(), 'title', true ) ) {
+		$commenttitle = '<strong>' . esc_attr( $commenttitle ) . '</strong><br/>';
+		$text = $commenttitle . $text;
+	} 
+
+	if( $commentrating = get_comment_meta( get_comment_ID(), 'rating', true ) ) {
+		$commentrating = '<p class="comment-rating">'  . $commentrating . '</strong></p>';
+		$text = $text . $commentrating;
+		return $text;
+	} else {
+		return $text;
+	}
+}
+
+
+//можливість відповідати на коментарі(форма підтягується)
+function enqueue_comment_reply() {
+	if( is_singular() )
+		wp_enqueue_script('comment-reply');
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_comment_reply' );
+
+
+//кастомний вивід коментарів (свій HTML)
+function mytheme_comment($comment, $args, $depth){ ?>
+<article class="block post-comment" id="comment-<?php comment_ID() ?>">
+	<div class="author-photo-wr">
+		<?php echo get_avatar( $comment, 65 ); ?>
+	</div>
+	<div class="author-content">
+		<header class="comment-header">
+			<h3 class="author-name"><?php echo $comment->comment_author; ?></h3>
+			<p class="publish"><?php echo get_comment_date('F d, Y'); ?></p>
+			<?php
+			$link = get_comment_reply_link(array(
+				'reply_text' => "Відповісти",
+				'depth' => 1,
+				'max_depth' => 2,
+				));
+
+			echo $link;
+			?>
+		</header>
+		<p class="reting">
+			<?php 
+			//виводимо рейтинг даного коментаря
+			$commentrating = get_comment_meta( get_comment_ID(), 'rating', true );
+			if($commentrating){
+				for( $i=1; $i <= 5; $i++ ){
+							//додаємо клас active щоб рейтинг засвітився
+					if($i <= $commentrating){
+						echo '<i class="fa fa-star active" aria-hidden="true"></i>';
+					} else {
+						echo '<i class="fa fa-star" aria-hidden="true"></i>';
+					}
+				}
+			}
+			?>
+		</p>
+		<div class="block-content">
+			<p><?php echo $comment->comment_content; ?></p>
+		</div>
+	</article>
+	<?php 
+}
+
 
 
 ****************************************************************************************
