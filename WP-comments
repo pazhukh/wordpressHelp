@@ -75,3 +75,181 @@ https://wp-kama.ru/function/get_comments#post_id-chislo
 		<?php }
 
 		?>
+		
+		
+*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/
+*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/
+*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/
+*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/
+*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/*//*/*/*/*/*/**/*/*/*/*/*/*/*/*/
+
+//створюємо абсолютно свою форму з рейтингом, не чіпаючи функції яка створює форму
+в Loop пишемо код (single.php, single-custom.php, WP_Query)...
+
+
+
+<form action="<?php echo home_url();  ?>/wp-comments-post.php" method="post" id="commmentForm" class="form comment-form">
+		<p class="title">Leave a Reply</p>
+		<?php if ( !is_user_logged_in() ): ?>
+			<div class="row-input">
+				<div class="item-wr">
+					<input type="text" name="author" placeholder="Your Name" id="author" required>
+				</div>
+				<div class="item-wr">
+					<input type="email" id="email" name="email" placeholder="Your Email" required>
+				</div>
+				<p class="rating">
+					<?php 
+					for( $i=1; $i <= 5; $i++ ){
+						echo '
+
+						<input type="radio" name="rating" id="rating" value="'. $i .'"/> '. $i;  
+
+					}
+
+					?>
+				</p>
+			</div>
+		<?php endif; ?>
+		<textarea id="comment" name="comment" name="review-message" placeholder="Message" required></textarea>
+		<input name="submit" type="submit" id="sumbit" value="Post Comment" class="btn-classic submit"/>
+		<input type='hidden' name='comment_post_ID' value='<?php echo get_the_ID(); ?>' id='comment_post_ID' />
+		<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+	</form>
+
+
+
+
+//середня оцінка до поста
+
+		<?php 
+		//середня оцінка статті
+		$comments = get_comments( $args );
+		$raiting_summa = 0;
+		$raiting_counter = 0;
+		//проходимо по всі постах, і вираховуємо рейтинг лише в тих, де його поставили
+		foreach( $comments as $comment ){
+			$commentrating = get_comment_meta( get_comment_ID(), 'rating', true );
+			if($commentrating){
+				$raiting_counter +=1;
+				$raiting_summa += (int)$commentrating;
+			}
+		}		
+		//якщо рейтинг хоча б один поставили, тоді виводимо середнє значення, якщо ні - тоді Ще не має рейтингу
+		if($raiting_summa > 0 && $raiting_counter > 0){
+			$raiting_middle = round($raiting_summa / $raiting_counter);
+			echo $raiting_summa . ' сума<br>';
+			echo $raiting_counter . ' кількість кометарів з рейтенгом<br>';
+			echo $raiting_middle . ' середнє значення';
+			echo $raiting_summa / $raiting_counter . ' середнє значення';
+
+			for( $i=1; $i <= 5; $i++ ){
+				if($i <= $raiting_middle){
+					echo '<i class="fa fa-star active" aria-hidden="true"></i>';
+				} else {
+					echo '<i class="fa fa-star" aria-hidden="true"></i>';
+				}
+			}
+
+
+		} else {
+			echo 'Немає ще рейтингу';
+		}
+		
+		?>
+		
+		
+//виводимо коментар з назвою автора, датою, контеном та рейтинго
+	<div>
+		<?php 
+		$args = array(
+			'post_id' => get_the_ID(),
+			);
+		$comments = get_comments( $args );
+		foreach( $comments as $comment ){ ?>
+		
+		<article class="block post-comment">
+			<div class="author-photo-wr">
+				<?php echo get_avatar( $comment, 65 ); ?>
+				<!-- <img src="assets/img/demo/stock_34_80x80.jpg" alt=""> -->
+			</div>
+			<div class="author-content">
+				<header class="comment-header">
+					<h3 class="author-name"><?php echo $comment->comment_author; ?></h3>
+					<p class="publish"><?php echo get_comment_date('F d, Y'); ?></p>
+					<a href="#" class="reply">Reply</a>
+				</header>
+				<p class="reting">
+					<?php 
+					//виводимо рейтинг даного коментаря
+					$commentrating = get_comment_meta( get_comment_ID(), 'rating', true );
+					if($commentrating){
+						for( $i=1; $i <= 5; $i++ ){
+							//додаємо клас active щоб рейтинг засвітився
+							if($i <= $commentrating){
+								echo '<i class="fa fa-star active" aria-hidden="true"></i>';
+							} else {
+								echo '<i class="fa fa-star" aria-hidden="true"></i>';
+							}
+						}
+					}
+					?>
+				</p>
+				<div class="block-content">
+					<p><?php echo $comment->comment_content; ?></p>
+				</div>
+			</div>
+		</article>
+		<?php }
+
+		?>
+	</div>
+	<style>
+		.fa-star.active{
+			color: yellow;
+		}
+	</style>
+	
+******************************************************************************************************************************
+FUNCTIONS.PHP
+******************************************************************************************************************************
+
+//додаємо поле рейтинг в базу даних
+add_action( 'comment_post', 'save_extend_comment_meta_data' );
+function save_extend_comment_meta_data( $comment_id ){
+
+	if( !empty( $_POST['rating'] ) ){
+		$rating = intval($_POST['rating']);
+		add_comment_meta( $comment_id, 'rating', $rating );
+	}
+
+}
+
+// Провіряємо чи заповнене поле РЕЙТИНГ
+add_filter( 'preprocess_comment', 'verify_extend_comment_meta_data' );
+function verify_extend_comment_meta_data( $commentdata ) {
+
+	if ( empty( $_POST['rating'] ) || ! (int)$_POST['rating'] )
+		wp_die( __( 'Error: You did not add a rating. Hit the Back button on your Web browser and resubmit your comment with a rating.' ) );
+
+	return $commentdata;
+}
+
+
+//показуємо в адмінці рейтинг що задали в коментарі
+add_filter( 'comment_text', 'modify_extend_comment');
+function modify_extend_comment( $text ){
+
+  if( $commenttitle = get_comment_meta( get_comment_ID(), 'title', true ) ) {
+	$commenttitle = '<strong>' . esc_attr( $commenttitle ) . '</strong><br/>';
+	$text = $commenttitle . $text;
+  } 
+
+  if( $commentrating = get_comment_meta( get_comment_ID(), 'rating', true ) ) {
+	$commentrating = '<p class="comment-rating">'  . $commentrating . '</strong></p>';
+	$text = $text . $commentrating;
+	return $text;
+  } else {
+	return $text;
+  }
+}
