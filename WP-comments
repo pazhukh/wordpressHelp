@@ -1,0 +1,35 @@
+//видаляємо поле url (site) з форми коментаря
+add_filter('comment_form_default_fields', 'remove_url_from_comments');
+function remove_url_from_comments ($fields){
+    if(isset($fields['url']))
+       unset($fields['url']);
+       return $fields;
+}
+
+//змінюємо верску полів в формі і створюємо кастомний textarea, a default textarea видаляємо в нижчій функції(див нище)
+add_filter('comment_form_default_fields', 'extend_comment_custom_default_fields');
+function extend_comment_custom_default_fields($fields) {
+
+	$commenter = wp_get_current_commenter();
+	$req = get_option( 'require_name_email' );
+	$aria_req = ( $req ? " aria-required='true'" : '' );
+
+	$fields[ 'author' ] = '<input id="author" name="author" type="text" value="'. esc_attr( $commenter['comment_author'] ) .
+	'" size="30" tabindex="1"' . $aria_req . ' placeholder="Author"/>';
+
+	$fields[ 'email' ] = '<input id="email" name="email" type="text" value="'. esc_attr( $commenter['comment_author_email'] ) .
+	'" size="30"  tabindex="2"' . $aria_req . ' placeholder="email"/>';
+
+	$fields[ 'comment_field' ] = '<textarea id="comment" name="comment" type="text" placeholder="Message" ></textarea>';
+	return $fields;
+}
+
+//видаляє поле коментаря (textarea), але перед тим додаємо кастомне поле (див вище)
+function wpse250243_comment_form_defaults( $defaults ) {
+    if ( isset( $defaults[ 'comment_field' ] ) ) {
+        $defaults[ 'comment_field' ] = '';
+    }
+
+    return $defaults;
+}
+add_filter( 'comment_form_defaults', 'wpse250243_comment_form_defaults', 10, 1 );
