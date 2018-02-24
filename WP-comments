@@ -71,6 +71,14 @@ function extend_comment_custom_default_fields($fields) {
 	return $fields;
 }
 
+//для залогіненів коритувачів показувати лише текстове поле
+add_filter( 'comment_form_logged_in', 'filter_function_name_1488', 10, 3 );
+function filter_function_name_1488( $args_logged_in, $commenter, $user_identity ){ ?>
+	<textarea id="comment" name="comment" type="text" placeholder="Message"></textarea>
+
+	<?php return $args_logged_in;
+}
+
 
 //add custom fields to form
 function add_fields_to_comment_form( $defaults ) {
