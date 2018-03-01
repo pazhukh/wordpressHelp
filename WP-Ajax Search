@@ -134,7 +134,7 @@ function data_fetch(){
 
 
 
-
+********************************************************************************************************
 
 //шукаємо лише по заголовках
 /query only in title (for ajax search)
@@ -159,3 +159,16 @@ if ( ! empty( $search ) ) {
 return $search;
 }
 add_filter( 'posts_search', 'ni_search_by_title_only', 500, 2 );
+
+
+********************************************************************************************************
+//Exclude pages from WordPress Search (пошук лише по постам)
+if (!is_admin()) {
+function wpb_search_filter($query) {
+if ($query->is_search) {
+$query->set('post_type', 'product');
+}
+return $query;
+}
+add_filter('pre_get_posts','wpb_search_filter');
+}
