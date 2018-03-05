@@ -25,7 +25,16 @@ edit_post_link();
 
 //New Query шаблон виводу пстів
 <?php 
-$args = array('posts_per_page'=> 3, 'post_type' => 'course', 'category_name' => 'lang_schools');
+$args = array(
+'posts_per_page'=> 3, 
+'post_type' => 'product', 
+'tax_query' => array(
+		array(
+			'taxonomy' => 'product_cat',
+			'field'    => 'slug',
+			'terms'    => 'special'
+		)
+	));
 $the_query = new WP_Query($args); ?>
 <?php while  ($the_query->have_posts() ) : $the_query->the_post(); ?>
 	тіло циклу
