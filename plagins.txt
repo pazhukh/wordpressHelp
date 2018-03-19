@@ -40,3 +40,9 @@ https://wp-admin.com.ua/razrabotka-lichnogo-kabineta-wordpress/
 Smush Image Compression and Optimization - оптимізує фотографії
 Clearfy — плагин для оптимизации WordPress
 Optimize Database after Deleting Revisions, WP-Optimize - оптимізуємо базу даних
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-
+локалізація теми (переклад)
+*-*-*-*-*-*-*-*-*-*-*-*-
+https://misha.blog/wordpress/translations.html
