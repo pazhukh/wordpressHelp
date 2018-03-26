@@ -79,6 +79,7 @@ register_nav_menus( array(
 //реєструємо наші скріпти в футер та стилі
 function theme_name_scripts() {
         //реєструємо наш jquery (відміняємо jquery worpdress)
+	//get_stylesheet_directory_uri() - дочірня тема
   	wp_deregister_script( 'jquery' );
 	wp_register_script('jquery', get_template_directory_uri() . '/js/jquery-3.1.1.min.js', '','', true);
 	wp_enqueue_script( 'jquery' );
