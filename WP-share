@@ -33,21 +33,24 @@ function share_this(){
 
 
 //другий варіант функції
+//виклик функції повинен бути в циклі
+
 function get_sharePost(){
 	$title = get_the_title();
 	$permalink = get_permalink();
+	$image = get_the_post_thumbnail_url();
 
 	$facebook = 'https://www.facebook.com/sharer/sharer.php?u=' . $permalink;
 	$google = 'https://plus.google.com/share?url=' . $permalink;	
+	$pinterest = 'https://pinterest.com/pin/create/button/?url=' . $image .'&media='. $image .'&description=' . $title;
+	$twitter = 'https://twitter.com/home?status=' . $title;
 
 	return '
 
-	<p class="soc-icons d-flex justify-content-center share">
-		<a href="' . $facebook .'" data-csshare-type="facebook"><i class="fa fa-facebook" aria-hidden="true"></i>
-		</a>
-		<a href="' . $google .'" data-csshare-type="google-pluse"><i class="fa fa-google-plus" aria-hidden="true"></i>
-		</a>
-	</p>
+	<a href="' . $twitter . '" data-csshare-type="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+	<a href="' . $facebook . '" data-csshare-type="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+	<a href="' . $pinterest . '" data-csshare-type="pinterest"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
+	<a href="' . $google . '"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
 
 	';
 
