@@ -1,0 +1,77 @@
+.alignnone{
+	margin: 5px 20px 20px 0;
+}
+
+.aligncenter,
+div.aligncenter{
+	display: block;
+	margin: 5px auto 5px auto;
+}
+
+.alignright{
+	float:right;
+	margin: 5px 0 20px 20px!important;
+}
+
+.alignleft{
+	float: left;
+	margin: 5px 20px 20px 0!important;
+}
+
+a img{
+	&.alignright {
+		float: right;
+		margin: 5px 0 20px 20px;
+	}
+	&.alignnone {
+		margin: 5px 20px 20px 0;
+	}
+	&.alignleft {
+		float: left;
+		margin: 5px 20px 20px 0;
+	}
+	&.aligncenter {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+//GALLERY
+
+.gallery{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+.gallery-columns-1 .gallery-item{
+	width: 100%;
+}
+
+.gallery-columns-2 .gallery-item{
+	width: 50%;
+}
+
+.gallery-columns-3 .gallery-item{
+	width: 33.33%;
+}
+
+.gallery-columns-4 .gallery-item{
+	width: 25%;
+}
+.gallery-columns-5 .gallery-item{
+	width: 20%;
+}
+.gallery-columns-6 .gallery-item{
+	width: 16.666%;
+}
+.gallery-columns-7 .gallery-item{
+	width: 14.285%;
+}
+.gallery-columns-8 .gallery-item{
+	width: 12.5%;
+}
+.gallery-columns-9 .gallery-item{
+	width: 11.1%;
+}
