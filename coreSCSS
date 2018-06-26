@@ -75,3 +75,26 @@ a img{
 .gallery-columns-9 .gallery-item{
 	width: 11.1%;
 }
+@media screen and (max-width: 767px) {
+	.gallery-columns-6,
+	.gallery-columns-7,
+	.gallery-columns-8,
+	.gallery-columns-9{
+		.gallery-item{
+			width: 20%;
+		}
+	} 
+}
+
+@media screen and (max-width: 575px){
+	.gallery-columns-4,
+	.gallery-columns-5,
+	.gallery-columns-6,
+	.gallery-columns-7,
+	.gallery-columns-8,
+	.gallery-columns-9{
+		.gallery-item{
+			width: 33%;
+		}
+	}
+}
