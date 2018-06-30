@@ -3,7 +3,7 @@ $tags = wp_get_post_tags($post->ID);
 foreach ($tags as $tag){ 
 }
 //show all categories in loop
-$cats = wp_get_post_categories( $post->ID );
+$cats = wp_get_post_categories($post->ID, array('fields' => 'all'));
 
 *************************************************************
 
