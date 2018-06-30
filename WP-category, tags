@@ -1,3 +1,10 @@
+//show all post tags in loop
+$tags = wp_get_post_tags($post->ID);
+foreach ($tags as $tag){ 
+}
+
+*************************************************************
+
 <?php 
 $args = array(
 					'taxonomy'     => 'product_cat',
